@@ -1,3 +1,6 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
+#define IGNORE
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -10,13 +13,20 @@ typedef unsigned long long ull;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-void solve() {}
+#include "../math/ModMulPow.cpp"
+#include "../math/ModSQRT.cpp"
+
+void solve() {
+  ll a, p;
+  cin >> a >> p;
+  cout << modsqrt(a, p) << '\n';
+}
 
 int main() {
   cin.tie(0)->sync_with_stdio(0);
   cin.exceptions(cin.failbit);
   int tc = 1;
-//   cin >> tc;
+  cin >> tc;
   for (int i = 1; i <= tc; ++i) {
     solve();
   }

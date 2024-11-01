@@ -1,3 +1,6 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/sum_of_floor_of_linear"
+#define IGNORE
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -6,17 +9,22 @@ using namespace std;
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
 typedef long long ll;
-typedef unsigned long long ull;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-void solve() {}
+#include "../math/DivModSum.cpp"
+
+void solve() {
+  ll n, m, a, b;
+  cin >> n >> m >> a >> b;
+  cout << divsum(b, a, m, n) << '\n';
+}
 
 int main() {
   cin.tie(0)->sync_with_stdio(0);
   cin.exceptions(cin.failbit);
   int tc = 1;
-//   cin >> tc;
+  cin >> tc;
   for (int i = 1; i <= tc; ++i) {
     solve();
   }

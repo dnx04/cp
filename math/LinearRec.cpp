@@ -1,3 +1,4 @@
+typedef vector<ll> Poly;
 ll linearRec(Poly S, Poly tr, ll k) {
   int n = sz(tr);
 

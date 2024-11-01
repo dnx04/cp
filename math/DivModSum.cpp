@@ -1,18 +1,16 @@
-typedef unsigned long long ull;
-ull sumsq(ull to) { return to / 2 * ((to - 1) | 1); }
+ll sumsq(ll to) { return to / 2 * ((to - 1) | 1); }
 /// ^ written in a weird way to deal with overflows correctly
 
-ull divsum(ull to, ull c, ull k, ull m) {
-  ull res = k / m * sumsq(to) + c / m * to;
-  k %= m;
-  c %= m;
-  if (!k) return res;
-  ull to2 = (to * k + c) / m;
-  return res + (to - 1) * to2 - divsum(to2, m - 1 - c, m, k);
+// sum( (a + d*i) / m ) for i in [0, n-1]
+ll divsum(ll a, ll d, ll m, ll n) {
+  ll res = d / m * sumsq(n) + a / m * n;
+  d %= m, a %= m;
+  if (!d) return res;
+  ll to = (n * d + a) / m;
+  return res + (n - 1) * to - divsum(m - 1 - a, m, d, to);
 }
-
-ll modsum(ull to, ll c, ll k, ll m) {
-  c = ((c % m) + m) % m;
-  k = ((k % m) + m) % m;
-  return to * c + k * sumsq(to) - m * divsum(to, c, k, m);
+// sum( (a + d*i) % m ) for i in [0, n-1]
+ll modsum(ll a, ll d, ll m, ll n) {
+  a = ((a % m) + m) % m, d = ((d % m) + m) % m;
+  return n * a + d * sumsq(n) - m * divsum(a, d, m, n);
 }
