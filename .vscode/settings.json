@@ -1,0 +1,5 @@
+{
+    "C_Cpp.clang_format_style": "google",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true
+}
