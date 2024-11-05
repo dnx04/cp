@@ -13,8 +13,8 @@ typedef unsigned long long ull;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-#include "../math/ModMulPow.cpp"
-#include "../math/ModSQRT.cpp"
+#include "../math/ModMulPow.h"
+#include "../math/ModSQRT.h"
 
 void solve() {
   ll a, p;

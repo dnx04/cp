@@ -12,7 +12,7 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-#include "../math/ModLog.cpp"
+#include "../math/ModLog.h"
 
 void solve() {
   ll a, b, m;

@@ -12,7 +12,7 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-#include "../math/DivModSum.cpp"
+#include "../math/DivModSum.h"
 
 void solve() {
   ll n, m, a, b;

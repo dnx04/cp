@@ -12,7 +12,7 @@ typedef unsigned long long ull;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-#include "../graph/HopcroftKarp.cpp"
+#include "../graph/HopcroftKarp.h"
 
 void solve() {
   int l, r, m;
