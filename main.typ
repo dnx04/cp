@@ -94,6 +94,10 @@ $ C_n = 1 / (n + 1) binom(2n, n), C_(n + 1) = sum_(i=0)^n C_i C_(n - i) $
 
 Let $n = n_k p^k + n_(k-1) p^(k-1) + ... + n_0$ and $m = m_k p^k + m_(k-1) p^(k-1) + ... + m_0$ in base $p$. $ binom(n, m) = product_(i=0)^k binom(n_i, m_i) mod p $.
 
+=== Number of Derangements
+
+Let $d(n)$ be the number of permutations of $n$ elements without any fixed points. $ d(n) = (n - 1)(d(n - 1) + d(n - 2)) $
+
 === Stirling 1st
 
 Number of permutations of n elements with k cycles.
@@ -104,7 +108,7 @@ $ sum_(k = 0)^n s(n, k)x^k = x(x + 1)...(x + n - 1) $
 
 === Stirling 2nd
 
-Number of ways to partition n elements into exactly k groups.
+Number of ways to partition $n$ elements into exactly $k$ groups.
 
 $ S(n, k) = k S(n - 1, k) + S(n - 1, k - 1) $
 
@@ -114,12 +118,16 @@ $ S(n, k) = 1 / k! sum_(j = 0)^k (-1)^(k - j) binom(k, j) j^n $
 
 Given a group $G$ of symmetries and a set $X$, the number of elements of $X$ *up to symmetry* $|X/G|$ equals:
 
-$ |X/G| = 1/|G| sum_(g in G) |X^g| $
+$ lr(|X/G|) = 1/lr(|G|) sum_(g in G) |X^g| $
 
 Where $X^g$ is the set of elements in $X$ fixed by $g$.
 
-== Super interpretation of square
+== Super interpretation of kth powers
 
-Ví dụ, cho một cây có $N$ đỉnh. Trong mỗi cách tách cây thành các phần, mỗi cách có giá trị là tổng bình phương độ lớn các thành phần liên thông. Tính tổng giá trị tất cả các cách tách.
+The square of the size of a set is equal to the number of ordered pairs of elements in the set. So we iterate over pairs and for each we compute the contribution to the answer.
 
-Cách giải $O(n^2)$: Có một song ánh giữa đáp án của bài toán, với tổng các 
+Similarly, the $k$-th power is equal to the number of sequences (tuples) of length $k$.
+
+== Power technique
+
+If you want to maintain the sum of $k$-th powers, it might help to also maintain the sum of smaller powers. For example, if the sum of $0$-th, $1$-th and $2$-nd powers is $S_0$, $S_1$ and $S_2$, and we increase all elements by $x$, the new sums are $S_0$, $S_1 + S_0 x$ and $S_2 + 2x S_1 + x^2 S_0$.
