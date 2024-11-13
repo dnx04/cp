@@ -83,6 +83,9 @@
 #file("math/MillerRabin.h", description: [
   *Description:* Kiểm tra số nguyên tố nhanh, *chắc chắn* đúng trong `unsigned long long`.
 ])
+#file("math/Matrix.h", description: [
+  *Description:* Các phép toán trên ma trận.
+])
 #file("math/ModLog.h", description: [
   *Description:* Tìm $x > 0$ nhỏ nhất sao cho $a^x = b mod m$, hoặc $-1$. `modLog(a,1,m)` trả về order của $a$ trong $ZZ^*_m$. Độ phức tạp $O(sqrt(m))$.
 ])
@@ -90,7 +93,7 @@
   *Description:* Tìm căn bậc hai modulo $p$ trong trung bình $O(log p)$.
 ])
 #file("math/Factor.h", description: [
-  *Description:* Tìm một ước của $n$ nhanh trong $O(root(4, n) log n)$
+  *Description:* Tìm một ước của $n$ nhanh trong $O(root(4, n) log n)$. Phân tích đệ quy $n$ thành thừa số nguyên tố.
 ])
 #file("math/CRT.h", description: [
   *Description:* Duy trì các phương trình đồng dư và nghiệm thoả mãn.
@@ -110,10 +113,21 @@
 #file("math/BerlekampMassey.h", description: [
   *Description:* Phục hồi một dãy truy hồi cấp $n$ từ $2n$ số hạng đầu tiên trong $O(n^2)$.
 ])
+#file("math/Lagrange.h", description: [
+  *Description:* Tìm đa thức bậc $n - 1$ qua $n$ điểm trong $O(n^2)$. Vẫn đúng trong trường modulo.
+])
+#file("math/Gauss.h", description: [
+  *Description:* Giải hệ phương trình tuyến tính trong $O(n^3)$.
+])
+#file("math/GaussBinary.h", description: [
+  *Description:* Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3)$.
+])
 
 = Hình 
 
-#file("geometry/Point.h")
+#file("geometry/Primitives.h", description: [
+  *Description:* Tổng hợp mọi thứ cơ bản về hình.
+])
 #file("geometry/ConvexHull.h")
 
 = Cấu trúc dữ liệu
