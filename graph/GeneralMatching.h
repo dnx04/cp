@@ -1,32 +1,18 @@
 struct GeneralMatching {
-  GeneralMatching(int _n)
-      : n(_n),
-        match(_n, -1),
-        g(_n),
-        timer(-1),
-        label(_n),
-        parent(_n),
-        orig(_n),
-        aux(_n, -1) {}
+  int n;
+  vector<int> match;
+  GeneralMatching(int n): n(n), match(n, -1), g(n), timer(-1), label(n), parent(n), orig(n), aux(n, -1) {}
 
   void add_edge(int u, int v) {
-    g[u].push_back(v);
-    g[v].push_back(u);
+    g[u].push_back(v), g[v].push_back(u);
   }
 
   int get_match() {
-    for (int i = 0; i < n; i++) {
-      if (match[i] == -1) bfs(i);
-    }
+    for (int i = 0; i < n; i++) if (match[i] == -1) bfs(i);
     int res = 0;
-    for (int i = 0; i < n; i++) {
-      if (match[i] >= 0) ++res;
-    }
+    for (int i = 0; i < n; i++) if (match[i] >= 0) ++res;
     return res / 2;
   }
-
-  int n;
-  vector<int> match;
 
  private:
   int lca(int x, int y) {
@@ -80,8 +66,7 @@ struct GeneralMatching {
           q.push_back(match[x]);
         } else if (label[x] == 0 && orig[v] != orig[x]) {
           int a = lca(orig[v], orig[x]);
-          blossom(x, v, a);
-          blossom(v, x, a);
+          blossom(x, v, a), blossom(v, x, a);
         }
       }
     }
