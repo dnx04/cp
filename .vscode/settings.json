@@ -1,5 +1,10 @@
 {
     "C_Cpp.clang_format_style": "google",
     "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "iostream": "cpp",
+        "complex": "cpp",
+        "format": "cpp"
+    }
 }

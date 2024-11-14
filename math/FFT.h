@@ -1,3 +1,5 @@
+#pragma once
+
 typedef complex<double> C;
 typedef vector<double> vd;
 void fft(vector<C>& a) {

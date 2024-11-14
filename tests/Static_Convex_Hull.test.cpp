@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/sum_of_floor_of_linear"
+#define PROBLEM "https://judge.yosupo.jp/problem/static_convex_hull"
 
 #include <bits/stdc++.h>
 
@@ -8,15 +8,20 @@ using namespace std;
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
 typedef long long ll;
+typedef unsigned long long ull;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-#include "../math/DivModSum.h"
+#include "../geometry/ConvexHull.h"
 
 void solve() {
-  ll n, m, a, b;
-  cin >> n >> m >> a >> b;
-  cout << divsum(b, a, m, n) << '\n';
+  int n;
+  cin >> n;
+  vector<Point<ll>> pts(n);
+  rep(i, 0, n) cin >> pts[i].x >> pts[i].y;
+  auto hull = convexHull(pts);
+  cout << sz(hull) << '\n';
+  for (auto p : hull) cout << p.x << ' ' << p.y << '\n';
 }
 
 int main() {

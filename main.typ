@@ -71,7 +71,8 @@
 - Viết pseudocode trước khi code, điều này có thể tiết kiệm computer time. Không cần viết hết, mà chỉ cần những phần quan trong nhất.
 - Đừng debug code trên máy. In code và debug output rồi debug trên giấy.
 - Nếu kẹt, hãy đi dạo hoặc đi vệ sinh. Có thể nghĩ ra gì đó đấy.
-- Nếu bị WA liên tục, để tạm đấy và xem bài khác rồi quay lại sau. Đừng ngại viết lại hết code, thường chỉ mất khoảng 15 phút thôi.
+- Nếu bị WA liên tục, để tạm đấy và xem bài khác rồi quay lại sau. 
+- Đừng ngại viết lại hết code, thường chỉ mất khoảng 15 phút thôi.
 - Nếu có thể dễ sinh ra input lớn hoặc tricky test, hãy cố làm điều đó trước khi nộp.
 - Làm xong bài nào thì ném mọi thứ liên quan đến nó xuống đất (đề bài, giấy nháp, ...).
 - Xem bảng điểm liên tục. Nếu nhiều người giải được, nghĩa là bài đó dễ.
@@ -83,9 +84,7 @@
 #file("math/MillerRabin.h", description: [
   *Description:* Kiểm tra số nguyên tố nhanh, *chắc chắn* đúng trong `unsigned long long`.
 ])
-#file("math/Matrix.h", description: [
-  *Description:* Các phép toán trên ma trận.
-])
+#file("math/Matrix.h")
 #file("math/ModLog.h", description: [
   *Description:* Tìm $x > 0$ nhỏ nhất sao cho $a^x = b mod m$, hoặc $-1$. `modLog(a,1,m)` trả về order của $a$ trong $ZZ^*_m$. Độ phức tạp $O(sqrt(m))$.
 ])
@@ -120,15 +119,36 @@
   *Description:* Giải hệ phương trình tuyến tính trong $O(n^3)$.
 ])
 #file("math/GaussBinary.h", description: [
-  *Description:* Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3)$.
+  *Description:* Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$.
 ])
 
 = Hình 
 
-#file("geometry/Primitives.h", description: [
-  *Description:* Tổng hợp mọi thứ cơ bản về hình.
-])
-#file("geometry/ConvexHull.h")
+#file("geometry/Point.h")
+#file("geometry/SideOf.h")
+#file("geometry/ClosestPair.h")
+
+#file("geometry/OnSegment.h")
+#file("geometry/LineDistance.h")
+#file("geometry/LineIntersection.h")
+#file("geometry/LineProjectionReflection.h")
+#file("geometry/LinearTransformation.h")
+
+#file("geometry/CircleLine.h")
+#file("geometry/CircleIntersection.h")
+#file("geometry/CircleTangents.h")
+#file("geometry/Circumcircle.h")
+#file("geometry/MinimumEnclosingCircle.h")
+#file("geometry/CirclePolygonIntersection.h", description: [Trả về diện tích phần giao của đường tròn với đa giác trong $O(n)$])
+
+#file("geometry/InsidePolygon.h")
+#file("geometry/PolygonCenter.h")
+#file("geometry/PolygonArea.h", description: [ Trả về 2 lần diện tích có dấu của đa giác theo CCW.])
+#file("geometry/PolygonUnion.h", description: [ Trả về diện tích giao nhau của $n$ đa giác trong $O(N^2)$ với $N$ là tổng số điểm])
+
+#file("geometry/PointInsideHull.h")
+#file("geometry/HullDiameter.h")
+#file("geometry/ConvexHull.h", description: [Trả về bao lồi của tập điểm theo CCW. Nếu muốn tính cả điểm nằm trên biên, sửa `<=` thành `<`.])
 
 = Cấu trúc dữ liệu
 
@@ -177,6 +197,9 @@
 ])
 #file("misc/1D1D.cpp", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP 1 chiều: $f(i) = min_(0 <= j < i) f(j) + w(j, i)$ trong $O(n log n)$.
 ])
+#file("misc/Knuth.h", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP: $f(i, j) = min_(i <= k < j) f(i, k) + f(k + 1, j) + w(j, i)$ trong $O(n^2)$.])
+#file("misc/HexGrid.h")
+#file("misc/MaximalCliques.h", description: [Chạy một hàm nào đó trên tất cả các maximal clique của một đồ thị trong $O(O(3^{n/3}))$, đồ thị càng ít cạnh chạy càng nhanh.])
 
 = Trick & Ghi chú
 
@@ -227,4 +250,8 @@ $ E(X^2) = E(\#"ordered pairs"), E(X^k) = E(\#"ordered tuples") $
 == Power technique
 
 If you want to maintain the sum of $k$-th powers, it might help to also maintain the sum of smaller powers. For example, if the sum of $0$-th, $1$-th and $2$-nd powers is $S_0$, $S_1$ and $S_2$, and we increase all elements by $x$, the new sums are $S_0$, $S_1 + S_0 x$ and $S_2 + 2x S_1 + x^2 S_0$.
+
+== Định lý Pick
+
+Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên nằm trong đa giác, và $b$ là số điểm nguyên năm trên cạnh. Diện tích của đa giác là: $A = i + b/2 - 1$
 
