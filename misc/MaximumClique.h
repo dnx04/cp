@@ -7,7 +7,7 @@ struct Maxclique {
   vector<bs> e;
   vv V;
   vector<vi> C;
-  vi qmax, q, S, old;
+  vi qmax, q, S, old; // qmax = vertices in maximum clique, q = current clique
   void init(vv& r) {
     for (auto& v : r) v.d = 0;
     for (auto& v : r)

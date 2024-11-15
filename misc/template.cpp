@@ -17,7 +17,7 @@ struct chash {
   int operator()(int x) const { return x ^ RANDOM; }
 };
 using fast_map = gp_hash_table<int, int, chash>;
-using bs = dynamic_bitset<__uint128_t>;
+using bs = dynamic_bitset<u_int64_t>;
 
 #define rep(i, a, b) for (int i = a; i < (b); ++i)
 #define all(x) begin(x), end(x)
