@@ -1,10 +1,11 @@
-typedef bitset<128> B;
+// Usage: cliques(g, [&](const bs &clique) { callback }, ~bs(n), bs(n), bs(n));
+
 template <class F>
-void cliques(vector<B>& eds, F f, B P = ~B(), B X = {}, B R = {}) {
+void cliques(vector<bs>& eds, F f, bs P, bs X, bs R) {
   f(R);
   if (!P.any() && !X.any()) return;
   // if only need to find all maximal cliques
-  // auto q = (P | X)._Find_first();
+  // auto q = (P | X).find_first();
   // auto cands = P & ~eds[q];
   rep(i, 0, sz(eds)) if (P[i]) {
     R[i] = 1;

@@ -3,9 +3,9 @@ void FST(vector<T>& a, bool inv, string type) {
   for (int n = sz(a), step = 1; step < n; step *= 2) {
     for (int i = 0; i < n; i += 2 * step) rep(j, i, i + step) {
         T &u = a[j], &v = a[j + step];
-        if (type == "and") tie(u, v) = inv ? make_pair(v - u, u) : make_pair(v, u + v);
-        else if (type == "or") tie(u, v) = inv ? make_pair(v, u - v) : make_pair(u + v, u);
-        else if (type == "xor") tie(u, v) = make_pair(u + v, u - v);
+        if (type == "and") tie(u, v) = inv ? tuple{v - u, u} : tuple{v, u + v};
+        else if (type == "or") tie(u, v) = inv ? tuple{v, u - v} : tuple{u + v, u};
+        else if (type == "xor") tie(u, v) = tuple{u + v, u - v};
       }
   }
   if (inv && type == "xor")

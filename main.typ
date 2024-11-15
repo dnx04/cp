@@ -109,6 +109,9 @@
 #file("math/FST.h", description: [
   *Description:* Tính tích chập AND, OR, XOR.
 ])
+#file("math/LinearRecurrence.h", description: [
+  *Description:* Tìm số hạng thứ $k$ của dãy truy hồi cấp $n$ trong $O(n^2 log k)$.
+])
 #file("math/BerlekampMassey.h", description: [
   *Description:* Phục hồi một dãy truy hồi cấp $n$ từ $2n$ số hạng đầu tiên trong $O(n^2)$.
 ])
@@ -119,7 +122,7 @@
   *Description:* Giải hệ phương trình tuyến tính trong $O(n^3)$.
 ])
 #file("math/GaussBinary.h", description: [
-  *Description:* Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$.
+  *Description:* Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng dynamic bitset.
 ])
 
 = Hình 
@@ -190,7 +193,7 @@
 
 = Khác
 
-#file("misc/pbds.h")
+#file("misc/template.cpp")
 #file("misc/LineContainer.h")
 #file("misc/Fraction.cpp", description: [
   Chặt nhị phân tìm phân số dương lớn thứ $k$ với mẫu số không vượt quá $n$.
@@ -199,7 +202,8 @@
 ])
 #file("misc/Knuth.h", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP: $f(i, j) = min_(i <= k < j) f(i, k) + f(k + 1, j) + w(j, i)$ trong $O(n^2)$.])
 #file("misc/HexGrid.h")
-#file("misc/MaximalCliques.h", description: [Chạy một hàm nào đó trên tất cả các maximal clique của một đồ thị trong $O(O(3^{n/3}))$, đồ thị càng ít cạnh chạy càng nhanh.])
+#file("misc/MaximalCliques.h", description: [Chạy một hàm nào đó duyệt qua tất cả các clique của một đồ thị trong $O(3^(n/3))$.])
+#file("misc/MaximumClique.h", description: [Tìm nhanh một clique lớn nhất. Dùng để giải Maximum Independent Set bằng cách tính maximum clique của phần bù.])
 
 = Trick & Ghi chú
 

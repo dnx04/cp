@@ -1,37 +1,34 @@
-typedef bitset<1000> bs;
-
-int solveLinear(vector<bs>& A, vi& b, bs& x, int m) {
-  int n = sz(A), rank = 0, br;
-  assert(m <= sz(x));
-  vi col(m);
-  iota(all(col), 0);
-  rep(i, 0, n) {
-    for (br = i; br < n; ++br)
-      if (A[br].any()) break;
-    if (br == n) {
-      rep(j, i, n) if (b[j]) return -1;
+vector<bs> solve_linear(int n, int m, vector<bs> A, bs b) {
+  int rk = 0;
+  rep(j, 0, m) {
+    if (rk == n) break;
+    rep(i, rk + 1, n) if (A[i][j]) {
+      swap(A[rk], A[i]);
+      if (b[rk] != b[i]) b[rk] = !b[rk], b[i] = !b[i];
       break;
     }
-    int bc = (int)A[br]._Find_next(i - 1);
-    swap(A[i], A[br]);
-    swap(b[i], b[br]);
-    swap(col[i], col[bc]);
-    rep(j, 0, n) if (A[j][i] != A[j][bc]) {
-      A[j].flip(i);
-      A[j].flip(bc);
+    if (!A[rk][j]) continue;
+    rep(i, 0, n) if (i != rk) {
+      if (A[i][j]) {
+        b[i] = b[i] ^ b[rk], A[i] = A[i] ^ A[rk];
+      }
     }
-    rep(j, i + 1, n) if (A[j][i]) {
-      b[j] ^= b[i];
-      A[j] ^= A[i];
-    }
-    rank++;
+    ++rk;
   }
+  rep(i, rk, n) if (b[i]) return {};
+  vector<bs> res(1, bs(m));
 
-  x = bs();
-  for (int i = rank; i--;) {
-    if (!b[i]) continue;
-    x[col[i]] = 1;
-    rep(j, 0, i) b[j] ^= A[j][i];
+  vi pivot(m, -1);
+  int p = 0;
+  rep(i, 0, rk) {
+    while (!A[i][p]) ++p;
+    res[0][p] = b[i], pivot[p] = i;
   }
-  return rank;  // (multiple solutions if rank < m)
+  rep(j, 0, m) if (pivot[j] == -1) {
+    bs x(m);
+    x[j] = 1;
+    rep(k, 0, j) if (pivot[k] != -1 && A[pivot[k]][j]) x[k] = 1;
+    res.eb(x);
+  }
+  return res;
 }
