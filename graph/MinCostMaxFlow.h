@@ -73,12 +73,14 @@ struct MCMF {
     pi[s] = 0;
     int it = N, ch = 1;
     ll v;
-    while (ch-- && it--)
-      rep(i, 0, N) if (pi[i] !=
-                       INF) for (edge& e :
-                                 ed[i]) if (e.cap) if ((v = pi[i] + e.cost) <
-                                                       pi[e.to]) pi[e.to] = v,
-                                                                 ch = 1;
+    while (ch-- && it--) {
+      rep(i, 0, N) {
+        if (pi[i] != INF)
+          for (edge& e : ed[i])
+            if (e.cap)
+              if ((v = pi[i] + e.cost) < pi[e.to]) pi[e.to] = v, ch = 1;
+      }
+    }
     assert(it >= 0);  // negative cost cycle
   }
 };

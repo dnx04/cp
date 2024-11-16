@@ -63,8 +63,6 @@
 - [ ] Tối đa cần bao nhiêu bộ nhớ ?
 - [ ] Clear data structure sau mỗi test case chưa ?
 
-#file("contest/commands.sh")
-
 == Advices
 
 - Nếu không sure, hãy thảo luận. Nếu kẹt, giải thích đề bài với teammate.
@@ -79,132 +77,10 @@
 - Ghi lại xem ai đang làm bài nào.
 - Cuối giờ, mọi người tập trung vào 1 bài thôi.
 
-= Toán
-
-#file("math/MillerRabin.h", description: [
-  *Description:* Kiểm tra số nguyên tố nhanh, *chắc chắn* đúng trong `unsigned long long`.
-])
-#file("math/Matrix.h")
-#file("math/ModLog.h", description: [
-  *Description:* Tìm $x > 0$ nhỏ nhất sao cho $a^x = b mod m$, hoặc $-1$. `modLog(a,1,m)` trả về order của $a$ trong $ZZ^*_m$. Độ phức tạp $O(sqrt(m))$.
-])
-#file("math/ModSQRT.h", description: [
-  *Description:* Tìm căn bậc hai modulo $p$ trong trung bình $O(log p)$.
-])
-#file("math/Factor.h", description: [
-  *Description:* Tìm một ước của $n$ nhanh trong $O(root(4, n) log n)$. Phân tích đệ quy $n$ thành thừa số nguyên tố.
-])
-#file("math/CRT.h", description: [
-  *Description:* Duy trì các phương trình đồng dư và nghiệm thoả mãn.
-])
-#file("math/DivModSum.h", description: [
-  *Description:* Tính $sum_(i = 0)^(n - 1) (a + i times d) / m$ and $sum_(i = 0)^(n - 1) (a + i times d) mod m $
-])
-#file("math/FFT.h", description: [
-  *Description:* FFT trên $RR$
-])
-#file("math/NTT.h", description: [
-  *Description:* FFT trên trường hữu hạn với modulo nguyên tố *bất kỳ*.
-])
-#file("math/FST.h", description: [
-  *Description:* Tính tích chập AND, OR, XOR.
-])
-#file("math/LinearRecurrence.h", description: [
-  *Description:* Tìm số hạng thứ $k$ của dãy truy hồi cấp $n$ trong $O(n^2 log k)$.
-])
-#file("math/BerlekampMassey.h", description: [
-  *Description:* Phục hồi một dãy truy hồi cấp $n$ từ $2n$ số hạng đầu tiên trong $O(n^2)$.
-])
-#file("math/Lagrange.h", description: [
-  *Description:* Tìm đa thức bậc $n - 1$ qua $n$ điểm trong $O(n^2)$. Vẫn đúng trong trường modulo.
-])
-#file("math/Gauss.h", description: [
-  *Description:* Giải hệ phương trình tuyến tính trong $O(n^3)$.
-])
-#file("math/GaussBinary.h", description: [
-  *Description:* Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng dynamic bitset.
-])
-
-= Hình 
-
-#file("geometry/Point.h")
-#file("geometry/SideOf.h")
-#file("geometry/ClosestPair.h")
-
-#file("geometry/OnSegment.h")
-#file("geometry/LineDistance.h")
-#file("geometry/LineIntersection.h")
-#file("geometry/LineProjectionReflection.h")
-#file("geometry/LinearTransformation.h")
-
-#file("geometry/CircleLine.h")
-#file("geometry/CircleIntersection.h")
-#file("geometry/CircleTangents.h")
-#file("geometry/Circumcircle.h")
-#file("geometry/MinimumEnclosingCircle.h")
-#file("geometry/CirclePolygonIntersection.h", description: [Trả về diện tích phần giao của đường tròn với đa giác trong $O(n)$])
-
-#file("geometry/InsidePolygon.h")
-#file("geometry/PolygonCenter.h")
-#file("geometry/PolygonArea.h", description: [ Trả về 2 lần diện tích có dấu của đa giác theo CCW.])
-#file("geometry/PolygonUnion.h", description: [ Trả về diện tích giao nhau của $n$ đa giác trong $O(N^2)$ với $N$ là tổng số điểm])
-
-#file("geometry/PointInsideHull.h")
-#file("geometry/HullDiameter.h")
-#file("geometry/ConvexHull.h", description: [Trả về bao lồi của tập điểm theo CCW. Nếu muốn tính cả điểm nằm trên biên, sửa `<=` thành `<`.])
-
-= Cấu trúc dữ liệu
-
-#file("ds/DSURollback.h")
-#file("ds/PersistentIT.h")
-#file("ds/Splay.h")
-
-= Đồ thị
-
-#file("graph/2SAT.h")
-#file("graph/HopcroftKarp.h", description: [
-  *Description:* Cặp ghép cực đại trên đồ thị 2 phía trong $O(E sqrt(V))$.
-
-  *Usage:* `vi btoa(m, -1); hopcroftKarp(g, btoa);`
-])
-#file("graph/GeneralMatching.h", description: [
-  *Description:* Thuật toán Blossom tìm cặp ghép cực đại trên đồ thị thường trong $O(V^3)$. Đánh chỉ số từ 0.
-])
-#file("graph/PushRelabel.h", description: [
-  *Description:* Thuận toán Push-relabel trong $O(V^2 sqrt(E))$.
-])
-#file("graph/Hungarian.h")
-#file("graph/GomoryHu.h", description: [
-  *Description:* Tính maxflow của từng cặp đỉnh trong $N - 1$ lần chạy luồng.
-])
-// #file("graph/MinCostMaxFlow.h", description: [
-//   *Description:* Min-cost max-flow. If costs can be negative, call `setpi` before `maxflow`, not support negative cycle. To obtain the actual flow, look at positive values only.
-  
-//   *Time:* $O(F E log(V))$ where F is max flow. $O(V E)$ for `setpi`.
-// ])
-
-= Xâu
-
-#file("strings/MinRotation.h", description: [
-  Tìm cyclic shift của xâu có thứ tự từ điển nhỏ nhất trong $O(n)$. 
-])
-#file("strings/SuffixArray.h")
-#file("strings/AhoCorasick.h")
-
-= Khác
-
 #file("misc/template.cpp")
-#file("misc/LineContainer.h")
-#file("misc/Fraction.cpp", description: [
-  Chặt nhị phân tìm phân số dương lớn thứ $k$ với mẫu số không vượt quá $n$.
-])
-#file("misc/1D1D.cpp", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP 1 chiều: $f(i) = min_(0 <= j < i) f(j) + w(j, i)$ trong $O(n log n)$.
-])
-#file("misc/SOSDP.cpp")
-#file("misc/Knuth.h", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP: $f(i, j) = min_(i <= k < j) f(i, k) + f(k + 1, j) + w(j, i)$ trong $O(n^2)$.])
-#file("misc/HexGrid.h")
-#file("misc/MaximalCliques.h", description: [Chạy một hàm nào đó duyệt qua tất cả các clique của một đồ thị trong $O(3^(n/3))$.])
-#file("misc/MaximumClique.h", description: [Tìm nhanh một clique lớn nhất. Dùng để giải Maximum Independent Set bằng cách tính maximum clique của phần bù.])
+#file("misc/debug.h")
+#file("misc/tasks.json")
+#file("misc/launch.json")
 
 = Trick & Ghi chú
 
@@ -259,4 +135,131 @@ If you want to maintain the sum of $k$-th powers, it might help to also maintain
 == Định lý Pick
 
 Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên nằm trong đa giác, và $b$ là số điểm nguyên năm trên cạnh. Diện tích của đa giác là: $A = i + b/2 - 1$.
+
+
+= Toán
+
+#file("math/MillerRabin.h", description: [
+  *Description:* Kiểm tra số nguyên tố nhanh, *chắc chắn* đúng trong `unsigned long long`.
+])
+#file("math/Matrix.h")
+#file("math/ModLog.h", description: [
+  *Description:* Tìm $x > 0$ nhỏ nhất sao cho $a^x = b mod m$, hoặc $-1$. `modLog(a,1,m)` trả về order của $a$ trong $ZZ^*_m$. Độ phức tạp $O(sqrt(m))$.
+])
+#file("math/ModSQRT.h", description: [
+  *Description:* Tìm căn bậc hai modulo $p$ trong trung bình $O(log p)$.
+])
+#file("math/Factor.h", description: [
+  *Description:* Tìm một ước của $n$ nhanh trong $O(root(4, n) log n)$. Phân tích đệ quy $n$ thành thừa số nguyên tố.
+])
+#file("math/CRT.h", description: [
+  *Description:* Duy trì các phương trình đồng dư và nghiệm thoả mãn.
+])
+#file("math/DivModSum.h", description: [
+  *Description:* Tính $sum_(i = 0)^(n - 1) (a + i times d) / m$ and $sum_(i = 0)^(n - 1) (a + i times d) mod m $
+])
+#file("math/FFT.h", description: [
+  *Description:* FFT trên $RR$
+])
+#file("math/NTT.h", description: [
+  *Description:* FFT trên trường hữu hạn với modulo nguyên tố *bất kỳ*.
+])
+#file("math/FST.h", description: [
+  *Description:* Tính tích chập AND, OR, XOR.
+])
+#file("math/LinearRecurrence.h", description: [
+  *Description:* Tìm số hạng thứ $k$ của dãy truy hồi cấp $n$ trong $O(n^2 log k)$.
+])
+#file("math/BerlekampMassey.h", description: [
+  *Description:* Phục hồi một dãy truy hồi cấp $n$ từ $2n$ số hạng đầu tiên trong $O(n^2)$.
+])
+#file("math/Lagrange.h", description: [
+  *Description:* Tìm đa thức bậc $n - 1$ qua $n$ điểm trong $O(n^2)$. Vẫn đúng trong trường modulo.
+])
+#file("math/Gauss.h", description: [
+  *Description:* Giải hệ phương trình tuyến tính trong $O(n^3)$.
+])
+#file("math/GaussBinary.h", description: [
+  *Description:* Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng dynamic bitset.
+])
+
+= Cấu trúc dữ liệu
+
+#file("ds/DSURollback.h")
+#file("ds/PersistentIT.h")
+#file("ds/Splay.h")
+
+= Đồ thị
+
+#file("graph/2SAT.h")
+#file("graph/HopcroftKarp.h", description: [
+  *Description:* Cặp ghép cực đại trên đồ thị 2 phía trong $O(E sqrt(V))$.
+
+  *Usage:* `vi btoa(m, -1); hopcroftKarp(g, btoa);`
+])
+#file("graph/GeneralMatching.h", description: [
+  *Description:* Thuật toán Blossom tìm cặp ghép cực đại trên đồ thị thường trong $O(V^3)$. Đánh chỉ số từ 0.
+])
+#file("graph/PushRelabel.h", description: [
+  *Description:* Thuận toán Push-relabel trong $O(V^2 sqrt(E))$.
+])
+#file("graph/Hungarian.h")
+#file("graph/GomoryHu.h", description: [
+  *Description:* Tính maxflow của từng cặp đỉnh trong $N - 1$ lần chạy luồng.
+])
+#file("graph/MinCostMaxFlow.h", description: [
+  *Description:* Min-cost max-flow. If costs can be negative, call `setpi` before `maxflow`, not support negative cycle. To obtain the actual flow, look at positive values only.
+  
+  *Time:* $O(F E log(V))$ where F is max flow. $O(V E)$ for `setpi`.
+])
+
+= Xâu
+
+#file("strings/MinRotation.h", description: [
+  Tìm cyclic shift của xâu có thứ tự từ điển nhỏ nhất trong $O(n)$. 
+])
+#file("strings/SuffixArray.h")
+#file("strings/AhoCorasick.h")
+
+= Khác
+
+#file("misc/LineContainer.h")
+#file("misc/Fraction.cpp", description: [
+  Chặt nhị phân tìm phân số dương lớn thứ $k$ với mẫu số không vượt quá $n$.
+])
+#file("misc/1D1D.cpp", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP 1 chiều: $f(i) = min_(0 <= j < i) f(j) + w(j, i)$ trong $O(n log n)$.
+])
+#file("misc/SOSDP.cpp")
+#file("misc/Knuth.h", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP: $f(i, j) = min_(i <= k < j) f(i, k) + f(k + 1, j) + w(j, i)$ trong $O(n^2)$.])
+#file("misc/HexGrid.h")
+#file("misc/MaximalCliques.h", description: [Chạy một hàm nào đó duyệt qua tất cả các clique của một đồ thị trong $O(3^(n/3))$.])
+#file("misc/MaximumClique.h", description: [Tìm nhanh một clique lớn nhất. Dùng để giải Maximum Independent Set bằng cách tính maximum clique của phần bù.])
+
+= Hình 
+
+#file("geometry/Point.h")
+#file("geometry/SideOf.h")
+#file("geometry/ClosestPair.h")
+#file("geometry/ConvexHull.h", description: [Trả về bao lồi của tập điểm theo CCW. Nếu muốn tính cả điểm nằm trên biên, sửa `<=` thành `<`.])
+
+#file("geometry/OnSegment.h")
+#file("geometry/LineDistance.h")
+#file("geometry/LineIntersection.h")
+#file("geometry/LineProjectionReflection.h")
+#file("geometry/LinearTransformation.h")
+
+#file("geometry/CircleLine.h")
+#file("geometry/CircleIntersection.h")
+#file("geometry/CircleTangents.h")
+#file("geometry/Circumcircle.h")
+#file("geometry/MinimumEnclosingCircle.h")
+#file("geometry/CirclePolygonIntersection.h", description: [Trả về diện tích phần giao của đường tròn với đa giác trong $O(n)$])
+
+#file("geometry/InsidePolygon.h")
+#file("geometry/PolygonCenter.h")
+#file("geometry/PolygonArea.h", description: [ Trả về 2 lần diện tích có dấu của đa giác theo CCW.])
+#file("geometry/PolygonUnion.h", description: [ Trả về diện tích giao nhau của $n$ đa giác trong $O(N^2)$ với $N$ là tổng số điểm])
+
+#file("geometry/PointInsideHull.h")
+#file("geometry/HullDiameter.h")
 
