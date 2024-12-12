@@ -1,3 +1,8 @@
+/**
+ * Usage: polyRoots({{2,-3,1}},-1e9,1e9) // solve x^2-3x+2 = 0
+ * Time: O(n^2 \log(1/\epsilon))
+ */
+
 #include "Polynomial.h"
 
 vector<double> polyRoots(Poly p, double xmin, double xmax) {

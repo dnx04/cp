@@ -183,6 +183,7 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("math/Lagrange.h", description: [
   Tìm đa thức bậc $n - 1$ qua $n$ điểm trong $O(n^2)$. Vẫn đúng trong trường modulo.
 ])
+#file("math/Determinant.h")
 #file("math/Gauss.h", description: [
   Giải hệ phương trình tuyến tính trong $O(n^3)$.
 ])
@@ -191,7 +192,7 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 ])
 
 #file("misc/Polynomial.h")
-#file("misc/PolyRoots.h")
+#file("misc/PolyRoots.h", description: [Tìm nghiệm của đa thức])
 
 = Cấu trúc dữ liệu
 
@@ -218,6 +219,9 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("graph/Hungarian.h")
 #file("graph/Biconnected.h", description: [
   Tìm tất cả thành phân song liên thông trong $O(E + V)$, và với mỗi thành phần chạy callback cho mỗi cạnh.
+])
+#file("graph/EdgeColoring.h", description: [
+  Cho đồ thị $N$ đỉnh có bậc lớn nhất $D$, tô $D + 1$ màu vào cạnh sao cho 2 cạnh kề nhau khác màu trong $O(N M)$.
 ])
 #file("graph/GomoryHu.h", description: [
   Tính maxflow của từng cặp đỉnh trong $N - 1$ lần chạy luồng.
@@ -268,6 +272,7 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("misc/MaximalCliques.h", description: [Chạy một hàm nào đó duyệt qua tất cả các clique của một đồ thị trong $O(3^(n/3))$.])
 #file("misc/MaximumClique.h", description: [Tìm nhanh một clique lớn nhất. Dùng để giải Maximum Independent Set bằng cách tính maximum clique của phần bù.])
 #file("misc/Frievalds.cpp", description: [Kiểm tra xác suất tích ma trận $A B = C$ trong $O(T n^2)$. Xác suất sai là $2^(-T)$.])
+#file("misc/XorBasis.h")
 
 = Hình 
 

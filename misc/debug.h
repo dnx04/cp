@@ -29,3 +29,15 @@ template <class... U>
 print_op(tuple<U...>) {
   return print_tuple_utils<0, tuple<U...>>(out, u);
 }
+
+// Demo
+struct Circle {
+  double x, y, r;
+  Circle(double x_, double y_, double r_) : x(x_), y(y_), r(r_) {
+    assert(r >= 0);
+  }
+  friend print_op(Circle) {
+    return out << "(x " << showpos << -u.x << ") ^ 2 + (y " << showpos << -u.y
+               << ")^2 = " << u.r << "^2";
+  }
+};
