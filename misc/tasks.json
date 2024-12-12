@@ -2,13 +2,11 @@
   "tasks": [
     {
       "type": "cppbuild",
-      "label": "C/C++: g++ build active file",
-      "command": "C:/Users/dnx04/scoop/apps/mingw-winlibs/current/bin/g++",
+      "label": "C/C++: g++ build active file with debugging",
+      "command": "/usr/bin/g++",
       "args": [
         "-fdiagnostics-color=always",
         "-std=gnu++20",
-        "-D_GLIBCXX_DEBUG",
-        "-DLOCAL",
         "-O2",
         "-g",
         "-static",
@@ -20,6 +18,10 @@
         "-Wduplicated-cond",
         "-Wcast-qual",
         "-Wcast-align",
+        "-D_GLIBCXX_DEBUG",
+        "-D_FORTIFY_SOURCE=2",
+        "-fstack-protector",
+        "-DLOCAL",
         "${file}",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}"

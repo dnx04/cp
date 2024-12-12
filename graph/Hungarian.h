@@ -1,55 +1,33 @@
-template <typename T>
-pair<T, vector<int>> Hungarian(int n, int m, T c[][N]) {
-  vector<T> v(m), dist(m);
-  vector<int> L(n, -1), R(m, -1);
-  vector<int> index(m), prev(m);
-  auto getc = [&](int i, int j) { return c[i][j] - v[j]; };
-
-  iota(index.begin(), index.end(), 0);
-  for (int f = 0; f < n; ++f) {
-    for (int j = 0; j < m; ++j) {
-      dist[j] = getc(f, j), prev[j] = f;
-    }
-    T w = 0;
-    int j, l = 0, s = 0, t = 0;
-    while (true) {
-      if (s == t) {
-        l = s, w = dist[index[t++]];
-        for (int k = t; k < m; ++k) {
-          j = index[k];
-          T h = dist[j];
-          if (h <= w) {
-            if (h < w) t = s, w = h;
-            index[k] = index[t], index[t++] = j;
-          }
-        }
-        for (int k = s; k < t; ++k) {
-          j = index[k];
-          if (R[j] < 0) goto augment;
-        }
+pair<int, vi> hungarian(const vector<vi> &a) {
+  if (a.empty()) return {0, {}};
+  int n = sz(a) + 1, m = sz(a[0]) + 1;
+  vi u(n), v(m), p(m), ans(n - 1);
+  rep(i, 1, n) {
+    p[0] = i;
+    int j0 = 0;  // add "dummy" worker 0
+    vi dist(m, INT_MAX), pre(m, -1);
+    vector<bool> done(m + 1);
+    do {  // dijkstra
+      done[j0] = true;
+      int i0 = p[j0], j1, delta = INT_MAX;
+      rep(j, 1, m) if (!done[j]) {
+        auto cur = a[i0 - 1][j - 1] - u[i0] - v[j];
+        if (cur < dist[j]) dist[j] = cur, pre[j] = j0;
+        if (dist[j] < delta) delta = dist[j], j1 = j;
       }
-      int q = index[s++], i = R[q];
-      for (int k = t; k < m; ++k) {
-        j = index[k];
-        T h = getc(i, j) - getc(i, q) + w;
-        if (h < dist[j]) {
-          dist[j] = h, prev[j] = i;
-          if (h == w) {
-            if (R[j] < 0) goto augment;
-            index[k] = index[t], index[t++] = j;
-          }
-        }
+      rep(j, 0, m) {
+        if (done[j])
+          u[p[j]] += delta, v[j] -= delta;
+        else
+          dist[j] -= delta;
       }
+      j0 = j1;
+    } while (p[j0]);
+    while (j0) {  // update alternating path
+      int j1 = pre[j0];
+      p[j0] = p[j1], j0 = j1;
     }
-  augment:
-    for (int k = 0; k < l; ++k) v[index[k]] += dist[index[k]] - w;
-    int i;
-    do {
-      i = R[j] = prev[j];
-      swap(j, L[i]);
-    } while (i != f);
   }
-  T ret = 0;
-  for (int i = 0; i < n; ++i) ret += c[i][L[i]];
-  return {ret, L};
+  rep(j, 1, m) if (p[j]) ans[p[j] - 1] = j - 1;
+  return {-v[0], ans};  // min cost
 }

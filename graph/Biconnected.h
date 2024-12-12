@@ -1,3 +1,12 @@
+/**
+ * Usage:
+ *  int eid = 0; ed.resize(N);
+ *  for each edge (a,b) {
+ *    ed[a].emplace_back(b, eid);
+ *    ed[b].emplace_back(a, eid++); }
+ *  bicomps([\&](const vi\& edgelist) {...});
+ */
+
 vi num, st;
 vector<vector<pii>> ed;
 int Time;

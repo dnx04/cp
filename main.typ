@@ -57,7 +57,7 @@
   - [ ] Độ phức tạp có đúng không ?
   - [ ] Tối ưu mod ?
   - [ ] Copy biến quá nhiều ?
-  - [ ] Thay vector, map thành array, unordered_map ? Thay int thành short ?
+  - [ ] Thay `vector, map` thành `array, unordered_map` ? Thay `int` thành `short` ?
 
 4. Memory limit exceeded:
 - [ ] Tối đa cần bao nhiêu bộ nhớ ?
@@ -66,21 +66,23 @@
 == Advices
 
 - Nếu không sure, hãy thảo luận. Nếu kẹt, giải thích đề bài với teammate.
-- Viết pseudocode trước khi code, điều này có thể tiết kiệm computer time. Không cần viết hết, mà chỉ cần những phần quan trong nhất.
+- Viết pseudocode trước khi code, không chỉ để tiết kiệm computer time, mà còn tự phản biện chính mình.
 - Đừng debug code trên máy. In code và debug output rồi debug trên giấy.
 - Nếu kẹt, hãy đi dạo hoặc đi vệ sinh. Có thể nghĩ ra gì đó đấy.
-- Nếu bị WA liên tục, để tạm đấy và xem bài khác rồi quay lại sau. 
-- Đừng ngại viết lại hết code, thường chỉ mất khoảng 15 phút thôi.
+- Nếu bị WA liên tục, để tạm đấy và xem bài khác rồi quay lại. 
+- Đừng ngại viết lại hết code, thường chỉ mất khoảng 15 phút.
 - Nếu có thể dễ sinh ra input lớn hoặc tricky test, hãy cố làm điều đó trước khi nộp.
-- Làm xong bài nào thì ném mọi thứ liên quan đến nó xuống đất (đề bài, giấy nháp, ...).
-- Xem bảng điểm liên tục. Nếu nhiều người giải được, nghĩa là bài đó dễ.
+- Làm xong bài nào thì ném và xoá mọi thứ liên quan đến nó (đề bài, giấy nháp, ...).
 - Ghi lại xem ai đang làm bài nào.
 - Cuối giờ, mọi người tập trung vào 1 bài thôi.
 
-#file("misc/template.cpp")
+// #file("misc/template.cpp")
 #file("misc/debug.h")
-#file("misc/tasks.json")
-#file("misc/launch.json")
+#file("misc/compile.sh")
+// #file("misc/c_cpp_properties.json")
+
+// #file("misc/tasks.json")
+// #file("misc/launch.json")
 
 = Trick & Ghi chú
 
@@ -136,96 +138,127 @@ If you want to maintain the sum of $k$-th powers, it might help to also maintain
 
 Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên nằm trong đa giác, và $b$ là số điểm nguyên năm trên cạnh. Diện tích của đa giác là: $A = i + b/2 - 1$.
 
+== Nhận xét
+
+- Trong đồ thị 2 phía, MIS = N - cặp ghép cực đại.
+- Cho 2 xâu $S$, $T$. Số xâu phân biệt của prefix(S) + suffix(T) = $|S| * |T|$ - số kí tự giống nhau của S và T, không tính $S_0$ và $T_(n)$.
+
 
 = Toán
 
 #file("math/MillerRabin.h", description: [
-  *Description:* Kiểm tra số nguyên tố nhanh, *chắc chắn* đúng trong `unsigned long long`.
+  Kiểm tra số nguyên tố nhanh, *chắc chắn* đúng trong `unsigned long long`.
 ])
 #file("math/Matrix.h")
 #file("math/ModLog.h", description: [
-  *Description:* Tìm $x > 0$ nhỏ nhất sao cho $a^x = b mod m$, hoặc $-1$. `modLog(a,1,m)` trả về order của $a$ trong $ZZ^*_m$. Độ phức tạp $O(sqrt(m))$.
+  Tìm $x > 0$ nhỏ nhất sao cho $a^x = b mod m$, hoặc $-1$. `modLog(a,1,m)` trả về order của $a$ trong $ZZ^*_m$. Độ phức tạp $O(sqrt(m))$.
 ])
 #file("math/ModSQRT.h", description: [
-  *Description:* Tìm căn bậc hai modulo $p$ trong trung bình $O(log p)$.
+  Tìm căn bậc hai modulo $p$ trong trung bình $O(log p)$.
 ])
 #file("math/Factor.h", description: [
-  *Description:* Tìm một ước của $n$ nhanh trong $O(root(4, n) log n)$. Phân tích đệ quy $n$ thành thừa số nguyên tố.
+  Tìm một ước của $n$ nhanh trong $O(root(4, n) log n)$. Phân tích đệ quy $n$ thành thừa số nguyên tố.
 ])
 #file("math/CRT.h", description: [
-  *Description:* Duy trì các phương trình đồng dư và nghiệm thoả mãn.
+  Duy trì các phương trình đồng dư và nghiệm thoả mãn.
 ])
 #file("math/DivModSum.h", description: [
-  *Description:* Tính $sum_(i = 0)^(n - 1) (a + i times d) / m$ and $sum_(i = 0)^(n - 1) (a + i times d) mod m $
+  Tính $sum_(i = 0)^(n - 1) (a + i times d) / m$ and $sum_(i = 0)^(n - 1) (a + i times d) mod m $
 ])
 #file("math/FFT.h", description: [
-  *Description:* FFT trên $RR$
+  FFT trên $RR$
 ])
 #file("math/NTT.h", description: [
-  *Description:* FFT trên trường hữu hạn với modulo nguyên tố *bất kỳ*.
+  FFT modulo nguyên tố *bất kỳ* dựa trên FFT thực.
 ])
 #file("math/FST.h", description: [
-  *Description:* Tính tích chập AND, OR, XOR.
+  Tính tích chập AND, OR, XOR.
 ])
 #file("math/LinearRecurrence.h", description: [
-  *Description:* Tìm số hạng thứ $k$ của dãy truy hồi cấp $n$ trong $O(n^2 log k)$.
+  Tìm số hạng thứ $k$ của dãy truy hồi cấp $n$ `S[i] = sum S[i-j-1]tr[j]` trong $O(n^2 log k)$.
 ])
 #file("math/BerlekampMassey.h", description: [
-  *Description:* Phục hồi một dãy truy hồi cấp $n$ từ $2n$ số hạng đầu tiên trong $O(n^2)$.
+  Phục hồi một dãy truy hồi cấp $n$ từ $2n$ số hạng đầu tiên trong $O(n^2)$.
 ])
 #file("math/Lagrange.h", description: [
-  *Description:* Tìm đa thức bậc $n - 1$ qua $n$ điểm trong $O(n^2)$. Vẫn đúng trong trường modulo.
+  Tìm đa thức bậc $n - 1$ qua $n$ điểm trong $O(n^2)$. Vẫn đúng trong trường modulo.
 ])
 #file("math/Gauss.h", description: [
-  *Description:* Giải hệ phương trình tuyến tính trong $O(n^3)$.
+  Giải hệ phương trình tuyến tính trong $O(n^3)$.
 ])
 #file("math/GaussBinary.h", description: [
-  *Description:* Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng dynamic bitset.
+  Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng dynamic bitset.
 ])
+
+#file("misc/Polynomial.h")
+#file("misc/PolyRoots.h")
 
 = Cấu trúc dữ liệu
 
 #file("ds/DSURollback.h")
 #file("ds/PersistentIT.h")
 #file("ds/Splay.h")
+#file("ds/LinkCutTree.h")
+#file("ds/LiChaoTree.h")
+#file("ds/WaveletTree.h")
 
 = Đồ thị
 
-#file("graph/2SAT.h")
 #file("graph/HopcroftKarp.h", description: [
-  *Description:* Cặp ghép cực đại trên đồ thị 2 phía trong $O(E sqrt(V))$.
+  Cặp ghép cực đại trên đồ thị 2 phía trong $O(E sqrt(V))$.
 
   *Usage:* `vi btoa(m, -1); hopcroftKarp(g, btoa);`
 ])
 #file("graph/GeneralMatching.h", description: [
-  *Description:* Thuật toán Blossom tìm cặp ghép cực đại trên đồ thị thường trong $O(V^3)$. Đánh chỉ số từ 0.
+  Thuật toán Blossom tìm cặp ghép cực đại trên đồ thị thường trong $O(V^3)$. Đánh chỉ số từ 0.
 ])
 #file("graph/PushRelabel.h", description: [
-  *Description:* Thuận toán Push-relabel trong $O(V^2 sqrt(E))$.
+  Thuận toán Push-relabel trong $O(V^2 sqrt(E))$.
 ])
 #file("graph/Hungarian.h")
+#file("graph/Biconnected.h", description: [
+  Tìm tất cả thành phân song liên thông trong $O(E + V)$, và với mỗi thành phần chạy callback cho mỗi cạnh.
+])
 #file("graph/GomoryHu.h", description: [
-  *Description:* Tính maxflow của từng cặp đỉnh trong $N - 1$ lần chạy luồng.
+  Tính maxflow của từng cặp đỉnh trong $N - 1$ lần chạy luồng.
 ])
 #file("graph/MinCostMaxFlow.h", description: [
-  *Description:* Min-cost max-flow. If costs can be negative, call `setpi` before `maxflow`, not support negative cycle. To obtain the actual flow, look at positive values only.
+  Min-cost max-flow. If costs can be negative, call `setpi` before `maxflow`, not support negative cycle. To obtain the actual flow, look at positive values only.
   
   *Time:* $O(F E log(V))$ where F is max flow. $O(V E)$ for `setpi`.
 ])
+#file("graph/GlobalMinCut.h", description: [
+  Tìm lát cắt cực tiểu trong đồ thị vô hướng trong $O(V^3)$.
+])
+#file("graph/DirectedMST.h", description: [
+  Tìm cây khung nhỏ nhất trong đồ thị có hướng trong $O(E log V)$. Nếu không tồn tại in ra -1.
+])
+#file("graph/2SAT.h")
 
 = Xâu
 
+#file("strings/Hashing.h")
+#file("strings/KMP.h")
+#file("strings/Z.h")
 #file("strings/MinRotation.h", description: [
   Tìm cyclic shift của xâu có thứ tự từ điển nhỏ nhất trong $O(n)$. 
 ])
+#file("strings/Manacher.h")
 #file("strings/SuffixArray.h")
 #file("strings/AhoCorasick.h")
+#file("strings/PalindromeTree.h", description: [
+  Dựng Palindrome Tree biểu diễn tất cả các xâu con đối xứng của 1 xâu. Xâu độ dài $N$ *chỉ có tối đa $N$ xâu con đối xứng phân biệt*.
+])
 
 = Khác
 
 #file("misc/LineContainer.h")
 #file("misc/Fraction.cpp", description: [
   Chặt nhị phân tìm phân số dương lớn thứ $k$ với mẫu số không vượt quá $n$.
+])
+#file("misc/ContinuedFraction.h", description: [
+  Cho $N$ và số thực $x > 0$, tính xấp xỉ hữu tỉ $p/q$ của $x$ với $p, q <= N$ trong $O(log N)$. Đảm bảo $abs(p/q - x) < 1/q$.
+
 ])
 #file("misc/1D1D.cpp", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP 1 chiều: $f(i) = min_(0 <= j < i) f(j) + w(j, i)$ trong $O(n log n)$.
 ])
@@ -234,6 +267,7 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("misc/HexGrid.h")
 #file("misc/MaximalCliques.h", description: [Chạy một hàm nào đó duyệt qua tất cả các clique của một đồ thị trong $O(3^(n/3))$.])
 #file("misc/MaximumClique.h", description: [Tìm nhanh một clique lớn nhất. Dùng để giải Maximum Independent Set bằng cách tính maximum clique của phần bù.])
+#file("misc/Frievalds.cpp", description: [Kiểm tra xác suất tích ma trận $A B = C$ trong $O(T n^2)$. Xác suất sai là $2^(-T)$.])
 
 = Hình 
 
