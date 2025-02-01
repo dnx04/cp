@@ -1,0 +1,2 @@
+cp /usr/include/c++/14.2.1/x86_64-pc-linux-gnu/bits/extc++.h ./algo-ng/extc++.h
+g++ -O2 -g --std=gnu++23 -Wall -Wextra -Warith-conversion -Wlogical-op -Wshift-overflow=2 -Wcast-qual -Wcast-align -Wduplicated-cond -DLOCAL -D_GLIBCXX_DEBUG -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector extc++.h
