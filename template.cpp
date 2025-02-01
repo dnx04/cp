@@ -1,14 +1,19 @@
-#include <bits/stdc++.h>
-
 #ifdef LOCAL
-#include "tools/prettyprint.hpp"
+#include "algo-ng/extc++.h"
+#include "algo-ng/prettyprint.hpp"
+#else
+#include <bits/extc++.h>
 #endif
 
 using namespace std;
+using namespace __gnu_pbds;
+using namespace __gnu_cxx;
 
 #define rep(i, a, b) for (int i = a; i < (b); ++i)
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
+#define pb push_back
+#define eb emplace_back
 typedef long long ll;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
