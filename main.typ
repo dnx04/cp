@@ -1,12 +1,12 @@
 #import "@preview/codly:1.0.0": *
-#import "@preview/outrageous:0.3.0"
+// #import "@preview/outrageous:0.3.0"
 #import "@preview/cheq:0.2.2": checklist
 #import "icpc.typ": *
 
 #set outline(indent: auto, depth: 4)
 
 #show: codly-init.with()
-#show outline.entry: outrageous.show-entry.with()
+// #show outline.entry: outrageous.show-entry.with()
 #show: checklist
 
 #codly(number-format: none)
@@ -77,7 +77,7 @@
 - Cuối giờ, mọi người tập trung vào 1 bài thôi.
 
 // #file("misc/template.cpp")
-#file("misc/debug.h")
+// #file("misc/debug.h")
 #file("misc/compile.sh")
 // #file("misc/c_cpp_properties.json")
 
@@ -154,7 +154,7 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
   Tìm $x > 0$ nhỏ nhất sao cho $a^x = b mod m$, hoặc $-1$. `modLog(a,1,m)` trả về order của $a$ trong $ZZ^*_m$. Độ phức tạp $O(sqrt(m))$.
 ])
 #file("math/ModSQRT.h", description: [
-  Tìm căn bậc hai modulo $p$ trong trung bình $O(log p)$.
+  Tìm căn bậc hai modulo $p$ nguyên tố trong trung bình $O(log p)$.
 ])
 #file("math/Factor.h", description: [
   Tìm một ước của $n$ nhanh trong $O(root(4, n) log n)$. Phân tích đệ quy $n$ thành thừa số nguyên tố.
@@ -191,14 +191,19 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
   Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng dynamic bitset.
 ])
 
-#file("misc/Polynomial.h")
+#file("misc/Polynomial.h", description: [Các phép toán trên đa thức, hàm `divroot` trả về kết quả phép chia đa thức cho $(x - r)$ và phần dư.])
 #file("misc/PolyRoots.h", description: [Tìm nghiệm của đa thức])
 
 = Cấu trúc dữ liệu
 
 #file("ds/DSURollback.h")
 #file("ds/PersistentIT.h")
-#file("ds/Splay.h")
+#file("ds/Splay.h", description: [
+  Code Splay của anh Hạnh.
+])
+#file("ds/Treap.h", description: [
+  Treap là BBST dễ code hơn Splay.
+])
 #file("ds/LinkCutTree.h")
 #file("ds/LiChaoTree.h")
 #file("ds/WaveletTree.h")
@@ -208,13 +213,13 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("graph/HopcroftKarp.h", description: [
   Cặp ghép cực đại trên đồ thị 2 phía trong $O(E sqrt(V))$.
 
-  *Usage:* `vi btoa(m, -1); hopcroftKarp(g, btoa);`
+  *Cách dùng:* `vi btoa(m, -1); hopcroftKarp(g, btoa);`
 ])
 #file("graph/GeneralMatching.h", description: [
   Thuật toán Blossom tìm cặp ghép cực đại trên đồ thị thường trong $O(V^3)$. Đánh chỉ số từ 0.
 ])
 #file("graph/PushRelabel.h", description: [
-  Thuận toán Push-relabel trong $O(V^2 sqrt(E))$.
+  Thuận toán tìm luồng cực đại Push-relabel trong $O(V^2 sqrt(E))$ (nhanh hơn Dinic).
 ])
 #file("graph/Hungarian.h")
 #file("graph/Biconnected.h", description: [
@@ -241,15 +246,13 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 
 = Xâu
 
-#file("strings/Hashing.h")
-#file("strings/KMP.h")
 #file("strings/Z.h")
 #file("strings/MinRotation.h", description: [
   Tìm cyclic shift của xâu có thứ tự từ điển nhỏ nhất trong $O(n)$. 
 ])
 #file("strings/Manacher.h")
-#file("strings/SuffixArray.h")
 #file("strings/AhoCorasick.h")
+#file("strings/SuffixArray.h", description: [Suffix Array và LCP trong $O(n log n)$.])
 #file("strings/PalindromeTree.h", description: [
   Dựng Palindrome Tree biểu diễn tất cả các xâu con đối xứng của 1 xâu. Xâu độ dài $N$ *chỉ có tối đa $N$ xâu con đối xứng phân biệt*.
 ])
@@ -274,7 +277,9 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("misc/Frievalds.cpp", description: [Kiểm tra xác suất tích ma trận $A B = C$ trong $O(T n^2)$. Xác suất sai là $2^(-T)$.])
 #file("misc/XorBasis.h")
 
-= Hình 
+= Hình
+
+Các thuật toán hình có đa giác, nếu không chú thích gì, thì hoạt động với mọi loại đa giác (lồi, lõm, tự cắt).
 
 #file("geometry/Point.h")
 #file("geometry/SideOf.h")
@@ -284,19 +289,26 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("geometry/OnSegment.h")
 #file("geometry/LineDistance.h")
 #file("geometry/LineIntersection.h")
-#file("geometry/LineProjectionReflection.h")
-#file("geometry/LinearTransformation.h")
+#file("geometry/LineProjectionReflection.h", description: [Trả về chân đường vuông góc/điểm đối xứng (tuỳ vào `refl=false/true`) của điểm `p` qua đường `ab`. Các điểm phải là số thực, cẩn thận tràn số.])
 
 #file("geometry/CircleLine.h")
 #file("geometry/CircleIntersection.h")
-#file("geometry/CircleTangents.h")
+#file("geometry/CircleTangents.h", description: [
+  Tìm các tiếp tuyến ngoài của hai hình tròn, hoặc các tiếp tuyến trong nếu `r2` âm.
+
+  - Có thể trả về `0`, `1` hoặc `2` tiếp tuyến:
+  - `0` nếu một hình tròn chứa (hoặc chồng lên nhau, trong trường hợp nội tiếp, hoặc nếu hai hình tròn giống hệt nhau) hình tròn kia.
+  - `1` nếu hai hình tròn tiếp xúc với nhau (trong trường hợp này `first` = `second` và đường tiếp tuyến vuông góc với đường nối giữa tâm).
+  - `first` và `second` tương ứng cho biết các điểm tiếp xúc tại hình tròn 1 và hình tròn 2.
+  - Để tìm các tiếp tuyến của một hình tròn với một điểm, hãy đặt `r2 = 0`.
+])
 #file("geometry/Circumcircle.h")
 #file("geometry/MinimumEnclosingCircle.h")
 #file("geometry/CirclePolygonIntersection.h", description: [Trả về diện tích phần giao của đường tròn với đa giác trong $O(n)$])
 
 #file("geometry/InsidePolygon.h")
 #file("geometry/PolygonCenter.h")
-#file("geometry/PolygonArea.h", description: [ Trả về 2 lần diện tích có dấu của đa giác theo CCW.])
+#file("geometry/PolygonArea.h", description: [ Trả về 2 lần diện tích có dấu của đa giác.])
 #file("geometry/PolygonUnion.h", description: [ Trả về diện tích giao nhau của $n$ đa giác trong $O(N^2)$ với $N$ là tổng số điểm])
 
 #file("geometry/PointInsideHull.h")
