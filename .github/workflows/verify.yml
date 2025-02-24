@@ -15,13 +15,13 @@ jobs:
 
     - name: Install uv
       uses: astral-sh/setup-uv@v5
-    
-    - name: Set up Python
-      uses: uv python install
       with:
         python-version-file: "pyproject.toml"
         enable-cache: true
         cache-dependency-glob: "uv.lock"
+    
+    - name: Set up Python
+      run: uv python install
 
     - name: Install dependencies
       run: uv pip install git+https://github.com/${{ github.repository }}.git@main
