@@ -24,7 +24,7 @@ jobs:
       run: uv python install
 
     - name: Install dependencies
-      run: uv add git+https://github.com/${{ github.repository }}.git@main
+      run: uv sync 
 
     - name: Run tests
       env:
