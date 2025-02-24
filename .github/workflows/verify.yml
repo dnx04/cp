@@ -6,9 +6,6 @@ on:
     - main
   pull_request:
 
-env:
-  UV_SYSTEM_PYTHON: 1
-
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -33,4 +30,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
-      run: oj-verify all
+      run: uv run oj-verify all
