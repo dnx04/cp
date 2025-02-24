@@ -1,3 +1,5 @@
+#import "@preview/jumble:0.0.1": *
+
 #let icpc(
   team: none,
   icon: none,
@@ -10,9 +12,24 @@
   doc
 }
 
-#let file(filename, description: none) = {
+#let minify = (code) => {
+  // Loại bỏ comment nhiều dòng: /* ... */
+  let withoutMulti = code.replace(regex("/\*[\s\S]*?\*/"), "")
+  // Loại bỏ comment một dòng: //...
+  let withoutSingle = withoutMulti.replace(regex("//[^\n]*"), "")
+  // Loại bỏ tất cả khoảng trắng (spaces, tab, newline, ...)
+  let minified = withoutSingle.replace(regex("\s+"), "")
+  minified
+}
+
+#let file(filename, hash: true, description: none) = {
   heading(depth: 2, [#filename.split("/").at(1).split(".").at(0)])
+  let content = read(filename)
   description
+  if (hash) {
+    let hash_value = raw(bytes-to-hex(sha1(minify(content))).slice(0, 8))
+    [(#hash_value)]
+  }
   line(length: 100%)
-  raw(read(filename), block: true, lang: filename.split(".").at(-1))
+  raw(content, block: true, lang: filename.split(".").at(-1))
 }

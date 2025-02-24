@@ -78,7 +78,7 @@
 
 // #file("misc/template.cpp")
 // #file("misc/debug.h")
-#file("misc/compile.sh")
+#file("misc/commands.sh", hash: false)
 // #file("misc/c_cpp_properties.json")
 
 // #file("misc/tasks.json")
@@ -149,7 +149,9 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("math/MillerRabin.h", description: [
   Kiểm tra số nguyên tố nhanh, *chắc chắn* đúng trong `unsigned long long`.
 ])
-#file("math/Matrix.h")
+#file("math/Matrix.h", description: [
+  Ma trận vuông, hỗ trợ nhân và luỹ thừa.
+])
 #file("math/ModLog.h", description: [
   Tìm $x > 0$ nhỏ nhất sao cho $a^x = b mod m$, hoặc $-1$. `modLog(a,1,m)` trả về order của $a$ trong $ZZ^*_m$. Độ phức tạp $O(sqrt(m))$.
 ])
@@ -160,10 +162,10 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
   Tìm một ước của $n$ nhanh trong $O(root(4, n) log n)$. Phân tích đệ quy $n$ thành thừa số nguyên tố.
 ])
 #file("math/CRT.h", description: [
-  Duy trì các phương trình đồng dư và nghiệm thoả mãn.
+  Duy trì hệ phương trình đồng dư.
 ])
 #file("math/DivModSum.h", description: [
-  Tính $sum_(i = 0)^(n - 1) (a + i times d) / m$ and $sum_(i = 0)^(n - 1) (a + i times d) mod m $
+  Tính $sum_(i = 0)^(n - 1) (a + i times d) / m$ và $sum_(i = 0)^(n - 1) (a + i times d) mod m $. Độ phức tạp $O(log N)$
 ])
 #file("math/FFT.h", description: [
   FFT trên $RR$
@@ -191,8 +193,8 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
   Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng dynamic bitset.
 ])
 
-#file("misc/Polynomial.h", description: [Các phép toán trên đa thức, hàm `divroot` trả về kết quả phép chia đa thức cho $(x - r)$ và phần dư.])
-#file("misc/PolyRoots.h", description: [Tìm nghiệm của đa thức])
+#file("misc/Polynomial.h", description: [Các phép toán trên đa thức, hàm `divroot` trả về kết quả phép chia đa thức cho $(x - x_0)$ và phần dư.])
+#file("misc/PolyRoots.h")
 
 = Cấu trúc dữ liệu
 
@@ -200,9 +202,6 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("ds/PersistentIT.h")
 #file("ds/Splay.h", description: [
   Code Splay của anh Hạnh.
-])
-#file("ds/Treap.h", description: [
-  Treap là BBST dễ code hơn Splay.
 ])
 #file("ds/LinkCutTree.h")
 #file("ds/LiChaoTree.h")
@@ -225,9 +224,9 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("graph/Biconnected.h", description: [
   Tìm tất cả thành phân song liên thông trong $O(E + V)$, và với mỗi thành phần chạy callback cho mỗi cạnh.
 ])
-#file("graph/EdgeColoring.h", description: [
-  Cho đồ thị $N$ đỉnh có bậc lớn nhất $D$, tô $D + 1$ màu vào cạnh sao cho 2 cạnh kề nhau khác màu trong $O(N M)$.
-])
+// #file("graph/EdgeColoring.h", description: [
+//   Cho đồ thị $N$ đỉnh có bậc lớn nhất $D$, tô $D + 1$ màu vào cạnh sao cho 2 cạnh kề nhau khác màu trong $O(N M)$.
+// ])
 #file("graph/GomoryHu.h", description: [
   Tính maxflow của từng cặp đỉnh trong $N - 1$ lần chạy luồng.
 ])

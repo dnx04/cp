@@ -1,5 +1,5 @@
-/* Usage
-  Matrix<int, 3> A;
+/*
+  Matrix<int> A(3);
   A.d = {{{{1, 2, 3}}, {{4, 5, 6}}, {{7, 8, 9}}}};
   vector<int> vec = {1, 2, 3};
   vec = (A ^ N) * vec;
