@@ -1,80 +1,52 @@
-struct GeneralMatching {
-  int n;
-  vector<int> match;
-  GeneralMatching(int n): n(n), match(n, -1), g(n), timer(-1), label(n), parent(n), orig(n), aux(n, -1) {}
-
-  void add_edge(int u, int v) {
-    g[u].push_back(v), g[v].push_back(u);
-  }
-
-  int get_match() {
-    for (int i = 0; i < n; i++) if (match[i] == -1) bfs(i);
-    int res = 0;
-    for (int i = 0; i < n; i++) if (match[i] >= 0) ++res;
-    return res / 2;
-  }
-
- private:
-  int lca(int x, int y) {
-    for (timer++;; swap(x, y)) {
+vector<int> GeneralMatching(vector<vector<int>>& graph) {
+  int n = graph.size(), timer = -1;
+  vector<int> mate(n, -1), label(n), parent(n), 
+              orig(n), aux(n, -1), q;
+  auto lca = [&](int x, int y) {
+    for (timer++; ; swap(x, y)) {
       if (x == -1) continue;
       if (aux[x] == timer) return x;
       aux[x] = timer;
-      x = (match[x] == -1 ? -1 : orig[parent[match[x]]]);
+      x = (mate[x] == -1 ? -1 : orig[parent[mate[x]]]);
     }
-  }
-
-  void blossom(int v, int w, int a) {
+  };
+  auto blossom = [&](int v, int w, int a) {
     while (orig[v] != a) {
-      parent[v] = w;
-      w = match[v];
-      if (label[w] == 1) {
-        label[w] = 0;
-        q.push_back(w);
-      }
-      orig[v] = orig[w] = a;
-      v = parent[w];
+      parent[v] = w; w = mate[v];
+      if (label[w] == 1) label[w] = 0, q.push_back(w);
+      orig[v] = orig[w] = a; v = parent[w];
     }
-  }
-
-  void augment(int v) {
+  };
+  auto augment = [&](int v) {
     while (v != -1) {
-      int pv = parent[v], nv = match[pv];
-      match[v] = pv;
-      match[pv] = v;
-      v = nv;
+      int pv = parent[v], nv = mate[pv];
+      mate[v] = pv; mate[pv] = v; v = nv;
     }
-  }
-
-  int bfs(int root) {
+  };
+  auto bfs = [&](int root) {
     fill(label.begin(), label.end(), -1);
     iota(orig.begin(), orig.end(), 0);
-    q.clear();
-    label[root] = 0;
-    q.push_back(root);
+    q.clear(); 
+    label[root] = 0; q.push_back(root);
     for (int i = 0; i < (int)q.size(); ++i) {
       int v = q[i];
-      for (auto x : g[v]) {
+      for (auto x : graph[v]) {
         if (label[x] == -1) {
-          label[x] = 1;
-          parent[x] = v;
-          if (match[x] == -1) {
-            augment(x);
-            return 1;
-          }
-          label[match[x]] = 0;
-          q.push_back(match[x]);
+          label[x] = 1; parent[x] = v;
+          if (mate[x] == -1) 
+            return augment(x), 1;
+          label[mate[x]] = 0; q.push_back(mate[x]);
         } else if (label[x] == 0 && orig[v] != orig[x]) {
           int a = lca(orig[v], orig[x]);
-          blossom(x, v, a), blossom(v, x, a);
+          blossom(x, v, a); blossom(v, x, a);
         }
       }
     }
     return 0;
-  }
-
- private:
-  vector<vector<int>> g;
-  int timer;
-  vector<int> label, parent, orig, aux, q;
-};
+  };
+  // Time halves if you start with (any) maximal matching.
+  for (int i = 0; i < n; i++) 
+    if (mate[i] == -1) 
+      bfs(i);
+  return mate;
+}

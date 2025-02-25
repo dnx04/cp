@@ -1,75 +1,43 @@
-template <int MAXC = 26>
-struct PalindromicTree {
-  PalindromicTree(const string& str) : _sz(str.size() + 5), next(_sz, vector<int>(MAXC, 0)), link(_sz, 0), qlink(_sz, 0), cnt(_sz, 0), right_id(_sz, 0), len(_sz, 0), s(_sz, 0) {
-    init();
-    for (int i = 0; i < (int)str.size(); ++i) {
-      add(str[i], i);
-    }
-    count();
-  }
-  int _sz;
-
-  // returns vector of (left, right, frequency)
-  vector<tuple<int, int, int>> get_palindromes() {
-    vector<tuple<int, int, int>> res;
-    dfs(0, res);
-    dfs(1, res);
-    return res;
-  }
-
-  void dfs(int u, vector<tuple<int, int, int>>& res) {
-    if (u > 1) {  // u = 0 and u = 1 are two empty nodes
-      res.emplace_back(right_id[u] - len[u] + 1, right_id[u], cnt[u]);
-    }
-    for (int i = 0; i < MAXC; ++i) {
-      if (next[u][i]) dfs(next[u][i], res);
-    }
-  }
-
-  int last, n, p;
-  vector<vector<int>> next, dlink;
-  vector<int> link, qlink, cnt, right_id, len, s;
-
-  int newnode(int l, int right) {
-    len[p] = l;
-    right_id[p] = right;
-    return p++;
-  }
-  void init() {
-    p = 0;
-    newnode(0, -1), newnode(-1, -1);
-    n = last = 0;
-    s[n] = -1, link[0] = 1;
-  }
-  int getlink(int x) {
-    while (s[n - len[x] - 1] != s[n]) {
-      if (s[n - len[link[x]] - 1] == s[n])
-        x = link[x];
-      else
-        x = qlink[x];
-    }
-    return x;
-  }
-  void add(char c, int right) {
-    c -= 'a';
-    s[++n] = c;
-    int cur = getlink(last);
-    if (!next[cur][(int)c]) {
-      int now = newnode(len[cur] + 2, right);
-      link[now] = next[getlink(link[cur])][(int)c];
-      next[cur][(int)c] = now;
-      if (s[n - len[link[now]]] == s[n - len[link[link[now]]]]) {
-        qlink[now] = qlink[link[now]];
-      } else {
-        qlink[now] = link[link[now]];
-      }
-    }
-    last = next[cur][(int)c];
-    cnt[last]++;
-  }
-  void count() {
-    for (int i = p - 1; i >= 0; i--) {
-      cnt[link[i]] += cnt[i];
-    }
-  }
+struct Node {
+  map<char, int> leg;
+  int link, len, cnt = 0;
 };
+
+vector<Node> PalTree(string str) {
+  vector<Node> T(str.size() + 2);
+  T[1].link = T[1].len = 0;
+  T[0].link = T[0].len = -1;
+  int last = 0, nodes = 2;
+
+  for (int i = 0; i < (int)str.size(); ++i) {
+    char now = str[i];
+    int node = last;
+    while (now != str[i - T[node].len - 1]) node = T[node].link;
+    if (T[node].leg.count(now)) {
+      node = T[node].leg[now];
+      T[node].cnt += 1;
+      last = node;
+      continue;
+    }
+    int cur = nodes++;
+    T[cur].len = T[node].len + 2;
+    T[node].leg[now] = cur;
+    int link = T[node].link;
+    while (link != -1) {
+      if (now == str[i - T[link].len - 1] && T[link].leg.count(now)) {
+        link = T[link].leg[now];
+        break;
+      }
+      link = T[link].link;
+    }
+    if (link <= 0) link = 1;
+    T[cur].link = link;
+    T[cur].cnt = 1;
+    last = cur;
+  }
+  for (int node = nodes - 1; node > 0; --node)
+    T[T[node].link].cnt += T[node].cnt;
+
+  T.resize(nodes);
+  return T;
+}

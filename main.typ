@@ -200,6 +200,7 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 
 #file("ds/DSURollback.h")
 #file("ds/PersistentIT.h")
+#file("ds/LineContainer.h", description: [Duy trì tập các đường thẳng dạng $y = k x + m$ và truy vấn giá trị lớn nhất tại điểm $x$. Nếu muốn tìm giá trị nhỏ nhất, đổi dấu `k`, `m` và kết quả truy vấn.])
 #file("ds/Splay.h", description: [
   Code Splay của anh Hạnh.
 ])
@@ -210,23 +211,25 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 = Đồ thị
 
 #file("graph/HopcroftKarp.h", description: [
-  Cặp ghép cực đại trên đồ thị 2 phía trong $O(E sqrt(V))$.
-
+  Cặp ghép cực đại trên đồ thị 2 phía trong $O(E sqrt(V))$. 0-indexed.
   *Cách dùng:* `vi btoa(m, -1); hopcroftKarp(g, btoa);`
 ])
 #file("graph/GeneralMatching.h", description: [
-  Thuật toán Blossom tìm cặp ghép cực đại trên đồ thị thường trong $O(V^3)$. Đánh chỉ số từ 0.
+  Tìm cặp ghép cực đại trên đồ thị thường trong $O(V^3)$. 0-indexed.
 ])
 #file("graph/PushRelabel.h", description: [
-  Thuận toán tìm luồng cực đại Push-relabel trong $O(V^2 sqrt(E))$ (nhanh hơn Dinic).
+  Tìm maxflow bằng Push-relabel trong $O(V^2 sqrt(E))$ (nhanh hơn Dinic).
 ])
-#file("graph/Hungarian.h")
+#file("graph/MinAssignment.h", description: [ Nhanh hơn Hungarian nhiều. Muốn tìm max cost, đặt cost âm. 0-indexed.])
 #file("graph/Biconnected.h", description: [
   Tìm tất cả thành phân song liên thông trong $O(E + V)$, và với mỗi thành phần chạy callback cho mỗi cạnh.
 ])
+#file("graph/2SAT.h")
 // #file("graph/EdgeColoring.h", description: [
 //   Cho đồ thị $N$ đỉnh có bậc lớn nhất $D$, tô $D + 1$ màu vào cạnh sao cho 2 cạnh kề nhau khác màu trong $O(N M)$.
 // ])
+//
+#file("graph/Dominator.h", description: [Dựng Dominator Tree cho đồ thị có hướng khi đặt gốc là $s$. $u$ là cha của $v$ nếu mọi đường đi từ $s$ đến $v$ đều phải đi qua $u$.])
 #file("graph/GomoryHu.h", description: [
   Tính maxflow của từng cặp đỉnh trong $N - 1$ lần chạy luồng.
 ])
@@ -241,7 +244,6 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("graph/DirectedMST.h", description: [
   Tìm cây khung nhỏ nhất trong đồ thị có hướng trong $O(E log V)$. Nếu không tồn tại in ra -1.
 ])
-#file("graph/2SAT.h")
 
 = Xâu
 
@@ -253,12 +255,11 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("strings/AhoCorasick.h")
 #file("strings/SuffixArray.h", description: [Suffix Array và LCP trong $O(n log n)$.])
 #file("strings/PalindromeTree.h", description: [
-  Dựng Palindrome Tree biểu diễn tất cả các xâu con đối xứng của 1 xâu. Xâu độ dài $N$ *chỉ có tối đa $N$ xâu con đối xứng phân biệt*.
+  Dựng Palindrome Tree. Nó có 2 root, root 0/1 cho xâu đối xứng chẵn/lẻ, mỗi node lưu độ dài xâu đối xứng, số lượng và link đến xâu đó. Xâu độ dài $N$ *chỉ có tối đa $N$ xâu con đối xứng phân biệt*.
 ])
 
 = Khác
 
-#file("misc/LineContainer.h")
 #file("misc/Fraction.cpp", description: [
   Chặt nhị phân tìm phân số dương lớn thứ $k$ với mẫu số không vượt quá $n$.
 ])
@@ -312,4 +313,7 @@ Các thuật toán hình có đa giác, nếu không chú thích gì, thì hoạ
 
 #file("geometry/PointInsideHull.h")
 #file("geometry/HullDiameter.h")
+#file("geometry/Minkowski.h", description: [ Tính tổng của 2 bao lồi trong $O(n + m).$])
+#file("geometry/Line.h")
+#file("geometry/HalfplaneSet.h", description: [Tìm bao lồi giao của nửa mặt phẳng trong $O(n log n)$.])
 
