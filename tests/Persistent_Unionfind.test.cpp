@@ -1,8 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 
-#include <bits/stdc++.h>
-
-#include "../../tools/prettyprint.hpp"
+#include <bits/extc++.h>
 
 using namespace std;
 
