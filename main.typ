@@ -65,7 +65,8 @@
 
 == Advices
 
-- Nếu không sure, hãy thảo luận. Nếu kẹt, giải thích đề bài với teammate.
+- Khi không còn bài gì để làm thì hẵng làm hình.
+- Nếu không sure bất cứ điều gì (kể cả đọc đề), hãy thảo luận với teammate.
 - Viết pseudocode trước khi code, không chỉ để tiết kiệm computer time, mà còn tự phản biện chính mình.
 - Đừng debug code trên máy. In code và debug output rồi debug trên giấy.
 - Nếu kẹt, hãy đi dạo hoặc đi vệ sinh. Có thể nghĩ ra gì đó đấy.
@@ -199,12 +200,11 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 = Cấu trúc dữ liệu
 
 #file("ds/DSURollback.h")
-#file("ds/PersistentIT.h")
 #file("ds/LineContainer.h", description: [Duy trì tập các đường thẳng dạng $y = k x + m$ và truy vấn giá trị lớn nhất tại điểm $x$. Nếu muốn tìm giá trị nhỏ nhất, đổi dấu `k`, `m` và kết quả truy vấn.])
 #file("ds/Splay.h", description: [
   Code Splay của anh Hạnh.
 ])
-#file("ds/LinkCutTree.h")
+#file("ds/PersistentIT.h")
 #file("ds/LiChaoTree.h")
 #file("ds/WaveletTree.h")
 
@@ -279,7 +279,7 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 
 = Hình
 
-Các thuật toán hình có đa giác, nếu không chú thích gì, thì hoạt động với mọi loại đa giác (lồi, lõm, tự cắt).
+Các thuật toán hình có đa giác, nếu không chú thích gì, thì hoạt động với mọi loại đa giác (lồi, lõm, tự cắt). Khi không còn bài gì để làm nữa thì hẵng làm hình.
 
 #file("geometry/Point.h")
 #file("geometry/SideOf.h")
