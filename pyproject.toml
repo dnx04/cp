@@ -1,7 +1,7 @@
 [project]
 name = "algo-ng"
-version = "0.1.0"
-description = "ICPC Notebook, using cutting-edge technology."
+version = "1.0.0"
+description = "algo - new generation"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
