@@ -1,9 +1,0 @@
-[project]
-name = "algo-ng"
-version = "0.1.0"
-description = "ICPC Notebook, using cutting-edge technology."
-readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [
-    "online-judge-verify-helper>=5.6.0",
-]
