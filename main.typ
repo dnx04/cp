@@ -187,14 +187,14 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("math/Lagrange.h", description: [
   Tìm đa thức bậc $n - 1$ qua $n$ điểm trong $O(n^2)$. Vẫn đúng trong trường modulo.
 ])
+#file("math/RowEchelon.h", description: [
+  Chuyển ma trận về dạng bậc thang trong $O(M^2 N)$, với $M$ là số hàng, $N$ là số cột.
+])
 #file("math/MatrixDet.h", description: [
   Tính định thức ma trận vuông trong $O(n^3)$.
 ])
 #file("math/MatrixInv.h", description: [
   Tìm ma trận nghịch đảo trong $O(n^3)$.
-])
-#file("math/RowEchelon.h", description: [
-  Chuyển ma trận về dạng bậc thang trong $O(M^2 N)$, với $M$ là số hàng, $N$ là số cột.
 ])
 #file("math/SolveLinear.h", description: [
   Giải hệ phương trình tuyến tính sau khi chuyển về dạng bậc thang trong $O(M^2 N)$.
