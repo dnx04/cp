@@ -1,71 +1,63 @@
-#include "../ds/DSURollback.h"
-
-struct Edge {
-  int a, b;
-  ll w;
+struct DSU {
+  vector<int> link;
+  DSU(int n) : link(n, -1) {}
+  int Find(int x) { return link[x] == -1 ? x : link[x] = Find(link[x]); }
 };
-struct Node {  /// lazy skew heap node
-  Edge key;
-  Node *l, *r;
-  ll delta;
-  void prop() {
-    key.w += delta;
-    if (l) l->delta += delta;
-    if (r) r->delta += delta;
-    delta = 0;
-  }
-  Edge top() {
-    prop();
-    return key;
-  }
-};
-Node* merge(Node* a, Node* b) {
-  if (!a || !b) return a ?: b;
-  a->prop(), b->prop();
-  if (a->key.w > b->key.w) swap(a, b);
-  swap(a->l, (a->r = merge(b, a->r)));
-  return a;
-}
-void pop(Node*& a) {
-  a->prop();
-  a = merge(a->l, a->r);
-}
 
-pair<ll, vi> dmst(int n, int r, vector<Edge>& g) {
-  RollbackUF uf(n);
-  vector<Node*> heap(n);
-  for (Edge e : g) heap[e.b] = merge(heap[e.b], new Node{e});
-  ll res = 0;
-  vi seen(n, -1), path(n), par(n);
-  seen[r] = r;
-  vector<Edge> Q(n), in(n, {-1, -1}), comp;
-  deque<tuple<int, int, vector<Edge>>> cycs;
-  rep(s, 0, n) {
-    int u = s, qi = 0, w;
-    while (seen[u] < 0) {
-      if (!heap[u]) return {-1, {}};
-      Edge e = heap[u]->top();
-      heap[u]->delta -= e.w, pop(heap[u]);
-      Q[qi] = e, path[qi++] = u, seen[u] = s;
-      res += e.w, u = uf.find(e.a);
-      if (seen[u] == s) {  /// found cycle, contract
-        Node* cyc = 0;
-        int end = qi, time = uf.time();
-        do cyc = merge(cyc, heap[w = path[--qi]]);
-        while (uf.join(u, w));
-        u = uf.find(u), heap[u] = cyc, seen[u] = -1;
-        cycs.push_front({u, time, {&Q[qi], &Q[end]}});
-      }
+struct SkewHeap {
+  struct Node { ll key, lazy = 0; int l = -1, r = -1; };
+  vector<Node> T;
+
+  void push(int x) {
+    if (x == -1 || !T[x].lazy) return;
+    for (int y : {T[x].l, T[x].r}) if (y != -1) 
+      T[y].lazy += T[x].lazy;
+    T[x].key += T[x].lazy, T[x].lazy = 0;
+  }
+  // Make new node. Returns its index. Indexes go 0, 1, ...
+  int New(ll key) { 
+    T.push_back(Node{key}); 
+    return (int)T.size() - 1;
+  }
+  // Increment all values in heap p by v
+  void Add(int x, ll v) { if (~x) T[x].lazy += v, push(x); }
+  // Merge heaps a and b
+  int Merge(int a, int b) {
+    if (b == -1 || a == -1) return a + b + 1;
+    if (T[a].key > T[b].key) swap(a, b);
+    int &l = T[a].l, &r = T[a].r;
+    push(r); swap(l, r); l = Merge(l, b);
+    return a;
+  }
+  void Pop(int& x) { x = Merge(T[x].l, T[x].r); }
+  ll Get(int x) { return T[x].key; }
+};
+
+struct Edge { int a, b; ll c; }; 
+
+pair<ll, vector<int>> DMST(int n, int src, vector<Edge> es) {
+  // Compress graph - O(M logN)
+  SkewHeap H; DSU D(2 * n); int x = 0;
+  vector<int> par(2 * n, -1), ins(par), vis(par);
+  for (auto e : es) ins[e.b] = H.Merge(ins[e.b], H.New(e.c));
+  auto go = [&](int x) { return D.Find(es[ins[x]].a); };
+  for (int i = n; ins[x] != -1; ++i) {
+    for (; vis[x] == -1; x = go(x)) vis[x] = 0;
+    for (; x != i; x = go(x)) {
+      int rem = ins[x]; ll w = H.Get(rem); H.Pop(rem);
+      H.Add(rem, -w); ins[i] = H.Merge(ins[i], rem);
+      par[x] = i; D.link[x] = i;
     }
-    rep(i, 0, qi) in[uf.find(Q[i].b)] = Q[i];
+    for (; ins[x] != -1 && go(x) == x; H.Pop(ins[x]));
   }
-
-  for (auto& [u, t, comp] : cycs) {  // restore sol (optional)
-    uf.rollback(t);
-    Edge inEdge = in[u];
-    for (auto& e : comp) in[uf.find(e.b)] = e;
-    in[uf.find(inEdge.b)] = inEdge;
+  // Expand graph - O(N)
+  ll cost = 0; vector<int> ans;
+  for (int i = src; i != -1; i = par[i]) vis[i] = 1;
+  for (int i = x; i >= 0; --i) {
+    if (vis[i]) continue;
+    cost += es[ins[i]].c; ans.push_back(ins[i]);
+    for (int j = es[ins[i]].b; j != -1 && !vis[j]; j = par[j]) 
+      vis[j] = 1;
   }
-  rep(i, 0, n) par[i] = in[i].a;
-  return {res, par};
+  return {cost, ans};
 }

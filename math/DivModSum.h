@@ -1,5 +1,4 @@
 ll sumsq(ll to) { return to / 2 * ((to - 1) | 1); }
-/// ^ written in a weird way to deal with overflows correctly
 
 // sum( (a + d*i) / m ) for i in [0, n-1]
 ll divsum(ll a, ll d, ll m, ll n) {

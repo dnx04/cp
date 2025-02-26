@@ -80,6 +80,7 @@
 // #file("misc/template.cpp")
 // #file("misc/debug.h")
 #file("misc/commands.sh", hash: false)
+#file("misc/macros.h", hash: false)
 // #file("misc/c_cpp_properties.json")
 
 // #file("misc/tasks.json")
@@ -186,26 +187,35 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 #file("math/Lagrange.h", description: [
   Tìm đa thức bậc $n - 1$ qua $n$ điểm trong $O(n^2)$. Vẫn đúng trong trường modulo.
 ])
-#file("math/Determinant.h")
-#file("math/Gauss.h", description: [
-  Giải hệ phương trình tuyến tính trong $O(n^3)$.
+#file("math/MatrixDet.h", description: [
+  Tính định thức ma trận vuông trong $O(n^3)$.
+])
+#file("math/MatrixInv.h", description: [
+  Tìm ma trận nghịch đảo trong $O(n^3)$.
+])
+#file("math/RowEchelon.h", description: [
+  Chuyển ma trận về dạng bậc thang trong $O(M^2 N)$, với $M$ là số hàng, $N$ là số cột.
+])
+#file("math/SolveLinear.h", description: [
+  Giải hệ phương trình tuyến tính sau khi chuyển về dạng bậc thang trong $O(M^2 N)$.
 ])
 #file("math/GaussBinary.h", description: [
-  Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng dynamic bitset.
+  Giải hệ phương trình tuyến tính modulo 2 trong $O(n^3/64)$ sử dụng bitset.
 ])
-
-#file("misc/Polynomial.h", description: [Các phép toán trên đa thức, hàm `divroot` trả về kết quả phép chia đa thức cho $(x - x_0)$ và phần dư.])
-#file("misc/PolyRoots.h")
+#file("math/PolyRoots.h", description: [
+  Tìm các nghiệm phức của đa thức bậc $n$ trong $O(n^2 times T)$ với $T$ là số lần lặp hội tụ. Nếu mò được nghiệm, hãy cho chúng vào phần khởi tạo.
+])
 
 = Cấu trúc dữ liệu
 
 #file("ds/DSURollback.h")
-#file("ds/LineContainer.h", description: [Duy trì tập các đường thẳng dạng $y = k x + m$ và truy vấn giá trị lớn nhất tại điểm $x$. Nếu muốn tìm giá trị nhỏ nhất, đổi dấu `k`, `m` và kết quả truy vấn.])
+#file("ds/LineContainer.h", description: [Duy trì tập các đường thẳng dạng $y = k x + m$ và truy vấn giá trị lớn nhất tại điểm $x$. Nếu muốn tìm giá trị nhỏ nhất, đổi dấu `k`, `m` và kết quả truy vấn.
+])
 #file("ds/Splay.h", description: [
   Code Splay của anh Hạnh.
 ])
 #file("ds/PersistentIT.h")
-#file("ds/LiChaoTree.h")
+// #file("ds/LiChaoTree.h")
 #file("ds/WaveletTree.h")
 
 = Đồ thị
@@ -226,12 +236,13 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 ])
 #file("graph/2SAT.h")
 // #file("graph/EdgeColoring.h", description: [
-//   Cho đồ thị $N$ đỉnh có bậc lớn nhất $D$, tô $D + 1$ màu vào cạnh sao cho 2 cạnh kề nhau khác màu trong $O(N M)$.
+//   Cho đồ thị $N$ đỉnh có bậc lớn nhất $D$, tô không quá $D + 1$ màu vào cạnh sao cho 2 cạnh kề nhau khác màu trong $O(N M)$.
 // ])
-//
-#file("graph/Dominator.h", description: [Dựng Dominator Tree cho đồ thị có hướng khi đặt gốc là $s$. $u$ là cha của $v$ nếu mọi đường đi từ $s$ đến $v$ đều phải đi qua $u$.])
+
+#file("graph/Dominator.h", description: [Dựng Dominator Tree cho đồ thị có hướng khi đặt gốc là $s$. $u$ là cha của $v$ nếu mọi đường đi từ $s$ đến $v$ đều phải đi qua $u$. Độ phức tạp $O(M log N)$ hằng số thấp. 
+])
 #file("graph/GomoryHu.h", description: [
-  Tính maxflow của từng cặp đỉnh trong $N - 1$ lần chạy luồng.
+  Dựng cây Gomory-Hu của đồ thị luồng trong $N - 1$ lần chạy luồng. Max flow/min cut giữa 2 đỉnh $u, v$ trên đồ thị luồng là trọng số cạnh nhỏ nhất trên đường đi từ $u$ đến $v$.
 ])
 #file("graph/MinCostMaxFlow.h", description: [
   Min-cost max-flow. If costs can be negative, call `setpi` before `maxflow`, not support negative cycle. To obtain the actual flow, look at positive values only.
@@ -242,7 +253,7 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
   Tìm lát cắt cực tiểu trong đồ thị vô hướng trong $O(V^3)$.
 ])
 #file("graph/DirectedMST.h", description: [
-  Tìm cây khung nhỏ nhất trong đồ thị có hướng trong $O(E log V)$. Nếu không tồn tại in ra -1.
+  Trả về giá trị và các cạnh của cây khung nhỏ nhất trên đồ thị có hướng với đỉnh nguồn cho trước trong $O(E log V)$. Nếu không tồn tại in ra `-1`.
 ])
 
 = Xâu
@@ -260,18 +271,21 @@ Cho một đa giác có các điểm nguyên. Gọi $i$ là số điểm nguyên
 
 = Khác
 
-#file("misc/Fraction.cpp", description: [
-  Chặt nhị phân tìm phân số dương lớn thứ $k$ với mẫu số không vượt quá $n$.
+#file("misc/FracBinarySearch.h", description: [
+  Tìm phân số $p/q$ nhỏ nhất trong đoạn $[0, 1]$ sao cho $f(p/q)$ là đúng, với $p <= m_p, q <= m_q$
 ])
 #file("misc/ContinuedFraction.h", description: [
   Cho $N$ và số thực $x > 0$, tính xấp xỉ hữu tỉ $p/q$ của $x$ với $p, q <= N$ trong $O(log N)$. Đảm bảo $abs(p/q - x) < 1/q$.
 
 ])
-#file("misc/1D1D.cpp", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP 1 chiều: $f(i) = min_(0 <= j < i) f(j) + w(j, i)$ trong $O(n log n)$.
-])
-#file("misc/SOSDP.cpp")
-#file("misc/Knuth.h", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP: $f(i, j) = min_(i <= k < j) f(i, k) + f(k + 1, j) + w(j, i)$ trong $O(n^2)$.])
-#file("misc/HexGrid.h")
+#file("misc/1D1D.cpp", description: [
+  Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP 1 chiều: $f(i) = min_(0 <= j < i) f(j) + w(j, i)$ trong $O(n log n)$.
+], hash: false)
+#file("misc/SOSDP.cpp", description: [ 
+  Toàn bộ implementation SOS DP của VNOI. 
+], hash: false)
+#file("misc/Knuth.h", description: [Nếu hàm $w(i, j)$ thoả mãn bất đẳng thức tứ giác: $w(a, c) + w(b, d) <= w(a, d) + w(b, c)$ với mọi $a < b < c < d$, thì ta có thể tính hàm DP: $f(i, j) = min_(i <= k < j) f(i, k) + f(k + 1, j) + w(j, i)$ trong $O(n^2)$.], hash: false)
+#file("misc/HexGrid.h", hash: false)
 #file("misc/MaximalCliques.h", description: [Chạy một hàm nào đó duyệt qua tất cả các clique của một đồ thị trong $O(3^(n/3))$.])
 #file("misc/MaximumClique.h", description: [Tìm nhanh một clique lớn nhất. Dùng để giải Maximum Independent Set bằng cách tính maximum clique của phần bù.])
 #file("misc/Frievalds.cpp", description: [Kiểm tra xác suất tích ma trận $A B = C$ trong $O(T n^2)$. Xác suất sai là $2^(-T)$.])
@@ -291,7 +305,7 @@ Các thuật toán hình có đa giác, nếu không chú thích gì, thì hoạ
 #file("geometry/LineIntersection.h")
 #file("geometry/LineProjectionReflection.h", description: [Trả về chân đường vuông góc/điểm đối xứng (tuỳ vào `refl=false/true`) của điểm `p` qua đường `ab`. Các điểm phải là số thực, cẩn thận tràn số.])
 
-#file("geometry/CircleLine.h")
+#file("geometry/CircleLine.h", description: [Định nghĩa của đường thẳng dạng $a x + b y = c$ với $a, b, c in ZZ/RR$])
 #file("geometry/CircleIntersection.h")
 #file("geometry/CircleTangents.h", description: [
   Tìm các tiếp tuyến ngoài của hai hình tròn, hoặc các tiếp tuyến trong nếu `r2` âm.
@@ -309,11 +323,11 @@ Các thuật toán hình có đa giác, nếu không chú thích gì, thì hoạ
 #file("geometry/InsidePolygon.h")
 #file("geometry/PolygonCenter.h")
 #file("geometry/PolygonArea.h", description: [ Trả về 2 lần diện tích có dấu của đa giác.])
-#file("geometry/PolygonUnion.h", description: [ Trả về diện tích giao nhau của $n$ đa giác trong $O(N^2)$ với $N$ là tổng số điểm])
+#file("geometry/PolygonUnion.h", description: [ Trả về diện tích giao nhau của $n$ đa giác trong $O(N^2)$ với $N$ là tổng số điểm. ])
 
 #file("geometry/PointInsideHull.h")
 #file("geometry/HullDiameter.h")
 #file("geometry/Minkowski.h", description: [ Tính tổng của 2 bao lồi trong $O(n + m).$])
-#file("geometry/Line.h")
-#file("geometry/HalfplaneSet.h", description: [Tìm bao lồi giao của nửa mặt phẳng trong $O(n log n)$.])
+#file("geometry/Line.h", description: [Định nghĩa của đường thẳng dạng $y = k x + m$ với $k, m in ZZ$ hoặc $RR$])
+#file("geometry/HalfplaneSet.h", description: [Tìm bao lồi giao của nửa mặt phẳng trong $O(n log n)$. Nửa mặt phẳng được định nghĩa bằng $a x + b y <= c$])
 

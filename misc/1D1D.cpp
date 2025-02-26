@@ -7,8 +7,7 @@ int n;
 long long f[N];
 
 long long w(int j, int i) {
-  // một hàm cost bất kì thỏa mãn
-  // bất đẳng thức tứ giác
+  // một hàm cost bất kì thỏa mãn bất đẳng thức tứ giác
 }
 
 void solve() {

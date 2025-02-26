@@ -2,7 +2,6 @@ vector<ll> berlekampMassey(vector<ll> s) {
   int n = sz(s), L = 0, m = 0;
   vector<ll> C(n), B(n), T;
   C[0] = B[0] = 1;
-
   ll b = 1;
   rep(i, 0, n) {
     ++m;
@@ -18,7 +17,6 @@ vector<ll> berlekampMassey(vector<ll> s) {
     b = d;
     m = 0;
   }
-
   C.resize(L + 1);
   C.erase(C.begin());
   for (ll& x : C) x = (mod - x) % mod;
