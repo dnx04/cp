@@ -1,8 +1,8 @@
 {
-    "C_Cpp.clang_format_style": "google",
-    "files.associations": {
-        "iostream": "cpp",
-        "complex": "cpp",
-        "format": "cpp"
-    }
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "C_Cpp.clang_format_style": "Google",
+    "editor.lineNumbers": "interval",
 }
